@@ -8,15 +8,25 @@ const routes = [
     component: Main,
   },
   {
-    path: "/drag",
-    name: "drag",
-    component: () => import("@/pages/DragAndDrop.vue"),
+    path: "/drag-tank",
+    name: "drag-tank",
+    component: () => import("@/pages/DragTankPage.vue"),
+  },
+  {
+    path: "/drag-car",
+    name: "drag-car",
+    component: () => import("@/pages/DragCarPage.vue"),
   },
   {
     path: "/api",
     name: "api",
     component: () => import("@/pages/Api.vue"),
   },
+  {
+    path: "/bitcoin",
+    name: "bitcoin",
+    component: () => import("@/pages/Bitcoin.vue"),
+  }
 ];
 
 const router = createRouter({
