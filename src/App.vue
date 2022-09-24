@@ -40,7 +40,7 @@ $colors: (
 }
 
 body {
-  background: var(--bs-light);
+  background: #3d3d3d;
   min-height: 100vh;
   font-family: "Fredoka One", monospace;
   color: var(--bs-red);

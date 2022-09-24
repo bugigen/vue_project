@@ -1,0 +1,109 @@
+{
+  "Guns": [
+    {
+      "id": 1,
+      "name": "107 мм ЗиС-6",
+      "penetration": 167,
+      "damage": 300,
+      "rate-of-fire": 6.45,
+      "price": 68290,
+      "tank-name": "КВ-4"
+    },
+    {
+      "id": 2,
+      "name": "122 мм Д-2-5Т",
+      "penetration": 175,
+      "damage": 390,
+      "rate-of-fire": 4.08,
+      "price": 84980,
+      "tank-name": "КВ-4"
+    },
+    {
+      "id": 3,
+      "name": "107 мм ЗиС-24",
+      "penetration": 227,
+      "damage": 320,
+      "rate-of-fire": 5.45,
+      "price": 180000,
+      "tank-name": "КВ-4"
+    },
+    {
+      "id": 4,
+      "name": "122 мм Д-25ТС",
+      "penetration": 217,
+      "damage": 390,
+      "rate-of-fire": 4.88,
+      "price": 125140,
+      "tank-name": "КВ-4"
+    },
+    {
+      "id": 5,
+      "name": "100 мм Д-10Т",
+      "penetration": 175,
+      "damage": 250,
+      "rate-of-fire": 6.82,
+      "price": 78180,
+      "tank-name": "ИС-3"
+    },
+    {
+      "id": 6,
+      "name": "122 мм Д-2-5Т",
+      "penetration": 175,
+      "damage": 390,
+      "rate-of-fire": 4.08,
+      "price": 84980,
+      "tank-name": "ИС-3"
+    },
+    {
+      "id": 7,
+      "name": "122 мм Д-25Т",
+      "penetration": 175,
+      "damage": 390,
+      "rate-of-fire": 4.88,
+      "price": 125140,
+      "tank-name": "ИС-3"
+    },
+    {
+      "id": 8,
+      "name": "122 мм БЛ-9",
+      "penetration": 225,
+      "damage": 390,
+      "rate-of-fire": 4.51,
+      "price": 178500,
+      "tank-name": "ИС-3"
+    }
+  ],
+  "Engines": [
+    {
+      "id": 100,
+      "name": "М-40 1000",
+      "power": 1000,
+      "price": 85000,
+      "tank-name": "КВ-4"
+    },
+    {
+      "id": 101,
+      "name": "2х В-2К-Ф",
+      "power": 1200,
+      "price": 87500,
+      "tank-name": "КВ-4"
+    }
+  ],
+  "Chassis": [
+    {
+      "id": 200,
+      "name": "КВ-4",
+      "load": 102.56,
+      "price": 17780,
+      "tank-name": "КВ-4"
+    },
+    {
+      "id": 201,
+      "name": "КВ-4 Бис",
+      "load": 112.56,
+      "price": 33600,
+      "tank-name": "КВ-4"
+    }
+  ]
+}
+

@@ -18,7 +18,7 @@ export default {
   .main {
     text-align: center;
     height: calc(100vh - 40px);
-    background: url(@/assets/images/Doom.jpg) 100% 100% no-repeat;
+    background: url(@/assets/images/Doom.jpg) 50% 50% no-repeat;
     background-size: cover;
   }
 </style>
