@@ -11,10 +11,12 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/variables.scss";
+
 .bitcoin {
   text-align: center;
-  height: calc(100vh - 40px);
+  height: $calcHeight;
   background: url(@/assets/images/Bitcoin.jpg) 50% 50% no-repeat;
   background-size: contain;
 }

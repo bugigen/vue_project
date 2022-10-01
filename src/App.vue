@@ -16,6 +16,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/variables.scss";
+
 @font-face {
   font-family: "Fredoka One";
   src: local("Fredoka One"),
@@ -26,24 +28,13 @@ export default {
   font-display: swap;
 }
 
-$colors: (
-  "bg": #dcdcdc,
-  "white": #fff,
-  "black": #000,
-  "font": #2c3e50,
-);
-
-:root {
-  @each $key, $value in $colors {
-    --color-#{$key}: #{$value};
-  }
-}
-
+html,
 body {
-  background: #3d3d3d;
+  background: var(--color-bg);
   min-height: 100vh;
   font-family: "Fredoka One", monospace;
-  color: var(--bs-red);
+  font-size: 1.3rem;
+  color: var(--color-red);
   cursor: default;
 }
 </style>

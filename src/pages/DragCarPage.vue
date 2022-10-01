@@ -10,10 +10,12 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/variables.scss";
+
 .drag {
   text-align: center;
-  height: calc(100vh - 40px);
+  height: $calcHeight;
   background: url(@/assets/images/Car.jpg) 50% 50% no-repeat;
   background-size: contain;
 }

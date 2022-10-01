@@ -1,0 +1,16 @@
+$colors: (
+        "bg": #3d3d3d,
+        "white": #fff,
+        "black": #000,
+        "red": #ff0000,
+        "font": #2c3e50,
+);
+
+$calcHeight: calc(100vh - 62px);
+
+:root {
+  @each $key, $value in $colors {
+    --color-#{$key}: #{$value};
+  }
+}
+
