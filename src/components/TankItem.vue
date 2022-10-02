@@ -1,6 +1,8 @@
 <template>
-  <div class="tank-item">
-    {{item.to}}
+  <div v-if="item" class="tank-item">
+    <img :src=getImgUrl() alt="Accessory"> &nbsp;
+    {{item.id_name}} <br>
+    {{item.name}}
   </div>
 </template>
 
@@ -9,13 +11,23 @@ export default {
   name: "TankItem",
   props: {
     item: {
-      required: true,
+      // type: String,
+      required: false,
+    }
+  },
+  data() {
+    return {
+    }
+  },
+  methods: {
+    getImgUrl() {
+      return require("@/" + this.item.image);
     }
   }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .tank-item {
   background: #e9e96e;
   padding: 10px 20px;

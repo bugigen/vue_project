@@ -19,10 +19,10 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .tank-list {
   padding: 10px 20px;
-  margin: 0 10px;
+  margin: 0 40px 10px;
   border: 2px solid #2e7c04;
   width: 30%;
   min-height: 250px;
@@ -35,6 +35,6 @@ export default {
   padding: 10px;
   font-weight: bold;
   border-bottom: 2px solid #634b4b;
-  height: 40%;
+  height: 100px;
 }
 </style>

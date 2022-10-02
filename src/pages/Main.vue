@@ -8,20 +8,15 @@
 <script>
 export default {
   name: "MainPage",
-  components: {
-
-  },
+  components: {}
 };
 </script>
 
 <style lang="scss" scoped>
-@import "@/variables.scss";
+@import "@/styles/variables.scss";
 
-  .main {
-    text-align: center;
-    height: $calcHeight;
-    background: url(@/assets/images/Doom.jpg) 50% 50% no-repeat;
-    background-size: cover;
-    //background: var(--color-red);
-  }
+.main {
+  background: url(@/assets/images/Doom.jpg) 50% 50% no-repeat;
+  @include background();
+}
 </style>

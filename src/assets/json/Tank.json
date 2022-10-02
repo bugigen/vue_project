@@ -2,223 +2,247 @@
   "Guns": [
     {
       "id": 1,
-      "image": "@/assets/images/Tank_images/Gun.png",
+      "id_name": "Пушка",
+      "image": "assets/images/Tank_images/Gun.png",
       "name": "107 мм ЗиС-6",
       "penetration": 167,
       "damage": 300,
-      "rate-of-fire": 6.45,
+      "rate_of_fire": 6.45,
       "price": 68290,
-      "tank-name": "КВ-4"
+      "tank_name": "КВ-4"
     },
     {
       "id": 2,
-      "image": "@/assets/images/Tank_images/Gun.png",
+      "id_name": "Пушка",
+      "image": "assets/images/Tank_images/Gun.png",
       "name": "122 мм Д-2-5Т",
       "penetration": 175,
       "damage": 390,
-      "rate-of-fire": 4.08,
+      "rate_of_fire": 4.08,
       "price": 84980,
-      "tank-name": "КВ-4"
+      "tank_name": "КВ-4"
     },
     {
       "id": 3,
-      "image": "@/assets/images/Tank_images/Gun.png",
+      "id_name": "Пушка",
+      "image": "assets/images/Tank_images/Gun.png",
       "name": "107 мм ЗиС-24",
       "penetration": 227,
       "damage": 320,
-      "rate-of-fire": 5.45,
+      "rate_of_fire": 5.45,
       "price": 180000,
-      "tank-name": "КВ-4"
+      "tank_name": "КВ-4"
     },
     {
       "id": 4,
-      "image": "@/assets/images/Tank_images/Gun.png",
+      "id_name": "Пушка",
+      "image": "assets/images/Tank_images/Gun.png",
       "name": "122 мм Д-25ТС",
       "penetration": 217,
       "damage": 390,
-      "rate-of-fire": 4.88,
+      "rate_of_fire": 4.88,
       "price": 125140,
-      "tank-name": "КВ-4"
+      "tank_name": "КВ-4"
     },
     {
       "id": 5,
-      "image": "@/assets/images/Tank_images/Gun.png",
+      "id_name": "Пушка",
+      "image": "assets/images/Tank_images/Gun.png",
       "name": "100 мм Д-10Т",
       "penetration": 175,
       "damage": 250,
-      "rate-of-fire": 6.82,
+      "rate_of_fire": 6.82,
       "price": 78180,
-      "tank-name": "ИС-3"
+      "tank_name": "ИС-3"
     },
     {
       "id": 6,
-      "image": "@/assets/images/Tank_images/Gun.png",
+      "id_name": "Пушка",
+      "image": "assets/images/Tank_images/Gun.png",
       "name": "122 мм Д-2-5Т",
       "penetration": 175,
       "damage": 390,
-      "rate-of-fire": 4.08,
+      "rate_of_fire": 4.08,
       "price": 84980,
-      "tank-name": "ИС-3"
+      "tank_name": "ИС-3"
     },
     {
       "id": 7,
-      "image": "@/assets/images/Tank_images/Gun.png",
+      "id_name": "Пушка",
+      "image": "assets/images/Tank_images/Gun.png",
       "name": "122 мм Д-25Т",
       "penetration": 175,
       "damage": 390,
-      "rate-of-fire": 4.88,
+      "rate_of_fire": 4.88,
       "price": 125140,
-      "tank-name": "ИС-3"
+      "tank_name": "ИС-3"
     },
     {
       "id": 8,
-      "image": "@/assets/images/Tank_images/Gun.png",
+      "id_name": "Пушка",
+      "image": "assets/images/Tank_images/Gun.png",
       "name": "122 мм БЛ-9",
       "penetration": 225,
       "damage": 390,
-      "rate-of-fire": 4.51,
+      "rate_of_fire": 4.51,
       "price": 178500,
-      "tank-name": "ИС-3"
+      "tank_name": "ИС-3"
     },
     {
       "id": 9,
-      "image": "@/assets/images/Tank_images/Gun.png",
+      "id_name": "Пушка",
+      "image": "assets/images/Tank_images/Gun.png",
       "name": "100 мм Д-10С",
       "penetration": 175,
       "damage": 250,
-      "rate-of-fire": 8.45,
+      "rate_of_fire": 8.45,
       "price": 83700,
-      "tank-name": "СУ-101"
+      "tank_name": "СУ-101"
     },
     {
       "id": 10,
-      "image": "@/assets/images/Tank_images/Gun.png",
+      "id_name": "Пушка",
+      "image": "assets/images/Tank_images/Gun.png",
       "name": "100 мм Д-54С",
       "penetration": 219,
       "damage": 320,
-      "rate-of-fire": 6.59,
+      "rate_of_fire": 6.59,
       "price": 140000,
-      "tank-name": "СУ-101"
+      "tank_name": "СУ-101"
     },
     {
       "id": 11,
-      "image": "@/assets/images/Tank_images/Gun.png",
+      "id_name": "Пушка",
+      "image": "assets/images/Tank_images/Gun.png",
       "name": "122 мм М62-С2",
       "penetration": 258,
       "damage": 440,
-      "rate-of-fire": 4.76,
+      "rate_of_fire": 4.76,
       "price": 295500,
-      "tank-name": "СУ-101"
+      "tank_name": "СУ-101"
     },
     {
       "id": 12,
-      "image": "@/assets/images/Tank_images/Gun.png",
+      "id_name": "Пушка",
+      "image": "assets/images/Tank_images/Gun.png",
       "name": "122 мм Д-25-СУ-101",
       "penetration": 210,
       "damage": 390,
-      "rate-of-fire": 5.41,
+      "rate_of_fire": 5.41,
       "price": 156000,
-      "tank-name": "СУ-101"
+      "tank_name": "СУ-101"
     }
   ],
   "Engines": [
     {
       "id": 101,
-      "image": "@/assets/images/Tank_images/Engine.png",
+      "id_name": "Двигатель",
+      "image": "assets/images/Tank_images/Engine.png",
       "name": "М-40 1000",
       "power": 1000,
       "price": 85000,
-      "tank-name": "КВ-4"
+      "tank_name": "КВ-4"
     },
     {
       "id": 102,
-      "image": "@/assets/images/Tank_images/Engine.png",
+      "id_name": "Двигатель",
+      "image": "assets/images/Tank_images/Engine.png",
       "name": "2х В-2К-Ф",
       "power": 1200,
       "price": 87500,
-      "tank-name": "КВ-4"
+      "tank_name": "КВ-4"
     },
     {
       "id": 103,
-      "image": "@/assets/images/Tank_images/Engine.png",
+      "id_name": "Двигатель",
+      "image": "assets/images/Tank_images/Engine.png",
       "name": "В-11",
       "power": 650,
       "price": 55270,
-      "tank-name": "ИС-3"
+      "tank_name": "ИС-3"
     },
     {
       "id": 104,
-      "image": "@/assets/images/Tank_images/Engine.png",
+      "id_name": "Двигатель",
+      "image": "assets/images/Tank_images/Engine.png",
       "name": "В-2-54ИС",
       "power": 700,
       "price": 79290,
-      "tank-name": "ИС-3"
+      "tank_name": "ИС-3"
     },
     {
       "id": 105,
-      "image": "@/assets/images/Tank_images/Engine.png",
+      "id_name": "Двигатель",
+      "image": "assets/images/Tank_images/Engine.png",
       "name": "В-2-44",
       "power": 560,
       "price": 49740,
-      "tank-name": "СУ-101"
+      "tank_name": "СУ-101"
     },
     {
       "id": 106,
-      "image": "@/assets/images/Tank_images/Engine.png",
+      "id_name": "Двигатель",
+      "image": "assets/images/Tank_images/Engine.png",
       "name": "В-2-54",
       "power": 620,
       "price": 79290,
-      "tank-name": "СУ-101"
+      "tank_name": "СУ-101"
     }
   ],
   "Suspensions": [
     {
       "id": 201,
-      "image": "@/assets/images/Tank_images/Suspension.png",
+      "id_name": "Подвеска",
+      "image": "assets/images/Tank_images/Suspension.png",
       "name": "КВ-4",
       "load": 102.56,
       "price": 17780,
-      "tank-name": "КВ-4"
+      "tank_name": "КВ-4"
     },
     {
       "id": 202,
-      "image": "@/assets/images/Tank_images/Suspension.png",
+      "id_name": "Подвеска",
+      "image": "assets/images/Tank_images/Suspension.png",
       "name": "КВ-4 Бис",
       "load": 112.56,
       "price": 33600,
-      "tank-name": "КВ-4"
+      "tank_name": "КВ-4"
     },
     {
       "id": 203,
-      "image": "@/assets/images/Tank_images/Suspension.png",
+      "id_name": "Подвеска",
+      "image": "assets/images/Tank_images/Suspension.png",
       "name": "ИС-3",
       "load": 50.56,
       "price": 17780,
-      "tank-name": "ИС-3"
+      "tank_name": "ИС-3"
     },
     {
       "id": 204,
-      "image": "@/assets/images/Tank_images/Suspension.png",
+      "id_name": "Подвеска",
+      "image": "assets/images/Tank_images/Suspension.png",
       "name": "ИС-3М",
       "load": 53.9,
       "price": 31450,
-      "tank-name": "ИС-3"
+      "tank_name": "ИС-3"
     },
     {
       "id": 205,
-      "image": "@/assets/images/Tank_images/Suspension.png",
+      "id_name": "Подвеска",
+      "image": "assets/images/Tank_images/Suspension.png",
       "name": "СУ-101",
       "load": 34.5,
       "price": 22200,
-      "tank-name": "СУ-101"
+      "tank_name": "СУ-101"
     },
     {
       "id": 206,
-      "image": "@/assets/images/Tank_images/Suspension.png",
+      "id_name": "Подвеска",
+      "image": "assets/images/Tank_images/Suspension.png",
       "name": "СУ-102",
       "load": 37.5,
       "price": 35000,
-      "tank-name": "СУ-101"
+      "tank_name": "СУ-101"
     }
   ]
 }

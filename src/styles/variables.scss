@@ -6,11 +6,14 @@ $colors: (
         "font": #2c3e50,
 );
 
-$calcHeight: calc(100vh - 62px);
-
 :root {
   @each $key, $value in $colors {
     --color-#{$key}: #{$value};
   }
 }
 
+@mixin background() {
+  text-align: center;
+  height: calc(100vh - 62px);
+  background-size: contain;
+}

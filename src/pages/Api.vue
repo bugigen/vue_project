@@ -11,13 +11,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/variables.scss";
+@import "@/styles/variables.scss";
 
 .api {
-  text-align: center;
-  height: $calcHeight;
   background: url(@/assets/images/Api.png) 50% 50% no-repeat;
-  background-size: contain;
+  @include background();
 }
 
 </style>

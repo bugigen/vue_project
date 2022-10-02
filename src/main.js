@@ -3,7 +3,8 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router/router";
 import store from "./store";
-
-createApp(App).use(store).use(router).mount("#app");
-
 import "bootstrap/dist/js/bootstrap.js";
+import VueAxios from "vue-axios";
+import axios from "axios";
+
+createApp(App).use(store).use(router).use(VueAxios, axios).mount("#app");
