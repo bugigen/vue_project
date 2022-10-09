@@ -8,20 +8,23 @@
         <option value="ИС-3">ИС-3</option>
         <option value="СУ-101">СУ-101</option>
       </select>
-      <div v-if="tankSelect==='КВ-4'" class="tankImage">
-        <img src="@/assets/images/Tank_images/KV-4.jpg" alt="KV-4">
-      </div>
-      <div v-else-if="tankSelect==='ИС-3'" class="tankImage">
-        <img src="@/assets/images/Tank_images/IS-3.jpg" alt="IS-3">
-      </div>
-      <div v-else-if="tankSelect==='СУ-101'" class="tankImage">
-        <img src="@/assets/images/Tank_images/SU-101.jpg" alt="SU-101">
-      </div>
-      <div v-else class="tankImage">
-        <img src="@/assets/images/Tank_images/Default_Tanks.jpg" alt="Choose">
+      <div class="tankImage">
+        <template v-if="tankSelect==='КВ-4'">
+          <img src="@/assets/images/Tank_images/KV-4.jpg" alt="KV-4">
+        </template>
+        <template v-else-if="tankSelect==='ИС-3'">
+          <img src="@/assets/images/Tank_images/IS-3.jpg" alt="IS-3">
+        </template>
+        <template v-else-if="tankSelect==='СУ-101'">
+          <img src="@/assets/images/Tank_images/SU-101.jpg" alt="SU-101">
+        </template>
+        <template v-else>
+          <img src="@/assets/images/Tank_images/Default_Tanks.jpg" alt="Choose">
+        </template>
       </div>
       <button class="btn btn-success" @click="verifyTank">Verify</button>
     </div>
+
     <div class="wrapper">
       <tank-list title="All accessories" id="allAccessories">
         <draggable
@@ -66,6 +69,9 @@
         <!--        <tank-item v-for="accessory in allAccessories.Engines" :key="accessory.id" :item="accessory.name"></tank-item>-->
       </tank-list>
     </div>
+
+
+
   </div>
 </template>
 
@@ -83,7 +89,6 @@ export default defineComponent({
       enabled: true,
       dragging: false,
       allAccessories: [],
-      suitableAccessories: [],
       url: "https://run.mocky.io/v3/d4b55493-5a4e-41a7-ac93-04c758e59799",
       tankSelect: ""
     };
@@ -91,24 +96,48 @@ export default defineComponent({
   components: {
     TankList,
     TankItem,
-    draggable: VueDraggableNext
+    draggable: VueDraggableNext,
   },
   mounted() {
     axios.get(this.url)
       .then((response) => {
         this.allAccessories = response.data;
-        // console.log(this.allAccessories.Guns[0].id_name);
-        // console.log(this.allAccessories);
+        this.shuffle(this.allAccessories.Guns);
+        this.shuffle(this.allAccessories.Engines);
+        this.shuffle(this.allAccessories.Suspensions);
+        // this.allAccessories.Guns.sort(() => Math.random() - 0.5);
       });
   },
   methods: {
+    shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    },
     verifyTank() {
-      // this.suitableAccessories.push(this.allAccessories.Guns[0].name)
-      // console.log(this.suitableAccessories);
+      let includeKV_4;
+      let includeIS_3;
+      let includeSU_101;
       let items = document.querySelectorAll("#suitableAccessories .item");
-      items.forEach(item => {
-        console.log(item.textContent);
+
+      items.forEach((item) => {
+        includeKV_4 = this.$store.state.accessoriesKV_4.includes(item.textContent.trim());
+        includeIS_3 = this.$store.state.accessoriesIS_3.includes(item.textContent.trim());
+        includeSU_101 = this.$store.state.accessoriesSU_101.includes(item.textContent.trim());
       });
+
+      if (includeKV_4 && this.tankSelect === "КВ-4") {
+        alert("Correct");
+      } else if (includeIS_3 && this.tankSelect === "ИС-3") {
+        alert("Correct");
+      } else if (includeSU_101 && this.tankSelect === "СУ-101") {
+        alert("Correct");
+      } else if (this.tankSelect === "") {
+        alert("Choose tank");
+      } else {
+        alert("Wrong!");
+      }
     }
   }
 });
@@ -119,13 +148,12 @@ export default defineComponent({
 
 .drag {
   overflow: auto;
-  background: url(@/assets/images/Tank.jpg) 50% 50% no-repeat;
+  background: url(@/assets/images/Tank_images/Tank_T-54.jpg) 50% 50% no-repeat;
   @include background();
 }
 
 .chooseTank {
   padding: 10px 0 0;
-  //font-weight: bold;
   font-size: 1.3em;
   display: flex;
   justify-content: center;

@@ -16,7 +16,7 @@ export default {
 @import "@/styles/variables.scss";
 
 .main {
-  background: url(@/assets/images/Doom.jpg) 50% 50% no-repeat;
+  background: url(@/assets/images/Tank_images/Tank_T-72.jpg) 50% 50% no-repeat;
   @include background();
 }
 </style>

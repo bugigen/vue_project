@@ -24,10 +24,16 @@ export default {
   padding: 10px 20px;
   margin: 0 40px 10px;
   border: 2px solid #2e7c04;
-  width: 30%;
+  width: 22vw;
   min-height: 250px;
   background: lightblue;
+  opacity: 0.87;
 }
+
+.tank-list:hover {
+  opacity: 1.0;
+}
+
 .title {
   display: flex;
   justify-content: center;

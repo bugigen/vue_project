@@ -19,10 +19,10 @@ export default {
 @import "@/styles/variables.scss";
 
 @font-face {
-  font-family: "Fredoka One";
-  src: local("Fredoka One"),
-       url("@/assets/fonts/Fredoka_One/Fredoka One.woff2") format("woff2"),
-       url("@/assets/fonts/Fredoka_One/Fredoka One.woff") format("woff");
+  font-family: "Fredoka";
+  src: local("Fredoka"),
+       url("@/assets/fonts/Fredoka/Fredoka.woff2") format("woff2"),
+       url("@/assets/fonts/Fredoka/Fredoka.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -42,10 +42,9 @@ html,
 body {
   background: var(--color-bg);
   min-height: 100vh;
-  font-family: "Fredoka One", BalsamiqSans-Bold, monospace;
+  font-family: Fredoka, BalsamiqSans-Bold, monospace;
   font-size: 1.3rem;
   color: var(--color-font);
   cursor: default;
-  //overflow: scroll;
 }
 </style>
