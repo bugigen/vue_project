@@ -14,7 +14,7 @@ export default {
 @import "@/styles/variables.scss";
 
 .api {
-  background: url(@/assets/images/Api.png) 50% 50% no-repeat;
+  background: url(@/assets/images/Api.jpg) 50% 50% no-repeat;
   @include background();
 }
 

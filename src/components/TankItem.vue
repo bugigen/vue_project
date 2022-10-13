@@ -29,10 +29,10 @@ export default {
 
 <style lang="scss" scoped>
 .tank-item {
-  background: #e9e96e;
+  background: var(--color-bg-yellow);
   padding: 10px 20px;
   margin: 15px 0;
-  border: 2px solid #9d9dc7;
+  border: 2px solid var(--color-purple);
   font-size: 0.9em;
 }
 </style>

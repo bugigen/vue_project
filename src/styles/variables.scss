@@ -1,10 +1,18 @@
 $colors: (
         "bg": #3d3d3d,
+        "bg-yellow": #e9e96e,
+        "bg-blue": #7ccfe0,
+        "bg-light-blue": #add8e6ff,
+        "bg-teal": #00bebe,
+        "bg-green": #3aa111,
+        "bg-dark-green": #328b0e,
         "white": #fff,
         "black": #000,
         "red": #ff0000,
+        "green": #2e7c04ff,
+        "purple": #9d9dc7,
         "font": #2c3e50,
-        "red-font": #c7482b,
+        "font-red": #c7482b,
 );
 
 :root {
@@ -16,5 +24,5 @@ $colors: (
 @mixin background() {
   text-align: center;
   height: calc(100vh - 62px);
-  background-size: contain;
+  background-size: cover;
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="drag">
     <div class="chooseTank">
-      <span>Tank</span>
+      <span id="top">Tank</span>
       <select v-model="tankSelect">
         <option value="" selected disabled>Choose Tank</option>
         <option value="КВ-4">КВ-4</option>
@@ -70,8 +70,12 @@
       </tank-list>
     </div>
 
-
-
+    <button @click="toTop" id="toTop">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <path
+          d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" />
+      </svg>
+    </button>
   </div>
 </template>
 
@@ -96,7 +100,7 @@ export default defineComponent({
   components: {
     TankList,
     TankItem,
-    draggable: VueDraggableNext,
+    draggable: VueDraggableNext
   },
   mounted() {
     axios.get(this.url)
@@ -138,6 +142,11 @@ export default defineComponent({
       } else {
         alert("Wrong!");
       }
+    },
+    toTop() {
+      document.querySelector("#top").scrollIntoView({
+        behavior: "smooth"
+      });
     }
   }
 });
@@ -147,8 +156,9 @@ export default defineComponent({
 @import "@/styles/variables.scss";
 
 .drag {
+  position: relative;
   overflow: auto;
-  background: url(@/assets/images/Tank_images/Tank_T-54.jpg) 50% 50% no-repeat;
+  background: url(@/assets/images/Tank2.jpg) 50% 50% no-repeat;
   @include background();
 }
 
@@ -158,6 +168,12 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   gap: 20px;
+  select {
+    font-size: 0.7em;
+  }
+  span {
+    color: var(--color-font);
+  }
 }
 
 .wrapper {
@@ -172,30 +188,47 @@ export default defineComponent({
 }
 
 .on-drag {
-  background: #7ccfe0;
-  color: #fff;
+  background: var(--color-bg-blue);
+  color: var(--color-white);
   z-index: 10;
 }
 
 .itemName {
   margin-top: 10px;
-  color: var(--color-red-font);
-}
-
-.chooseTank select {
-  font-size: 0.7em;
-}
-
-.chooseTank button {
-  margin-left: 100px;
+  color: var(--color-font-red);
 }
 
 .tankImage {
   height: 60px;
+  img {
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--color-white);
+  }
 }
 
-.tankImage img {
-  width: 100%;
-  height: 100%;
+#toTop {
+  position: fixed;
+  bottom: 30px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  z-index: 10;
+  text-align: center;
+  border-radius: 4px;
+  background: var(--color-bg-green);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  &:hover{
+    background: var(--color-bg-dark-green);
+    svg {
+      fill: var(--color-white);
+      transition: all 0.3s ease-in-out;
+    }
+  }
+  svg {
+    position: relative;
+    transition: all 0.3s ease-in-out;
+  }
 }
 </style>

@@ -32,6 +32,6 @@ export default {
   li {
     cursor: pointer;
   }
-  background: #00bebe;
+  background: var(--color-bg-teal);
 }
 </style>
