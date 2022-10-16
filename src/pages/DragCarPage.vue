@@ -26,27 +26,27 @@
 
 <script>
 import { ref, onMounted } from "vue";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, onSnapshot, doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 
 export default {
   name: "DragCarPage",
   setup() {
 
-    onMounted(async () => {
-      const querySnapshot = await getDocs(collection(db, "shelby_accessories"));
-      let fbItems = [];
-      querySnapshot.forEach((doc) => {
-        // console.log(doc.id, " => ", doc.data());
-        const item = {
-          id: doc.id,
-          name: doc.data().name,
-          isCorrect: doc.data().isCorrect,
-          categoryId: doc.data().categoryId
-        }
-        fbItems.push(item);
+    onMounted(() => {
+      onSnapshot(collection(db, "shelby_accessories"), (querySnapshot) => {
+        const fbItems = [];
+        querySnapshot.forEach((doc) => {
+          const item = {
+            id: doc.id,
+            name: doc.data().name,
+            isCorrect: doc.data().isCorrect,
+            categoryId: doc.data().categoryId
+          };
+          fbItems.push(item);
+        });
+        items.value = fbItems;
       });
-      items.value = fbItems;
     });
 
     const items = ref([
@@ -69,18 +69,22 @@ export default {
       ev.dataTransfer.dropEffect = "move";
       ev.dataTransfer.effectAllowed = "move";
       ev.dataTransfer.setData("itemID", item.id);
-      console.log(typeof item.id)
+      // console.log(typeof item.id);
     }
 
     function onDrop(ev, categoryId) {
       const itemID = parseInt(ev.dataTransfer.getData("itemID"));
-        // console.log(items.value)
+      // console.log(items.value)
       items.value = items.value.map((x) => {
-        console.log(typeof x.id)
-        console.log(typeof itemID)
+        // console.log(typeof x.id);
+        // console.log(typeof itemID);
         if (x.id === itemID) {
-          x.categoryId = categoryId;
+          updateDoc(doc(collection(db, "shelby_accessories"), categoryId), {
+            categoryId: 2
+          });
+          x.categoryId = 2;
         }
+        console.log(x.categoryId);
         return x;
       });
     }
@@ -112,7 +116,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  flex-basis: 50%;
+  flex-basis: 55%;
   background: rgb(250, 232, 112);
   //min-height: 1000px;
   padding: 20px;
@@ -127,6 +131,7 @@ export default {
   border-radius: 5px;
   min-height: 2200px;
   //height: 1000px;
+  //min-width: 150px;
   flex-basis: 43%;
 }
 
