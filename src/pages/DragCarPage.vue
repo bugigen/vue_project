@@ -29,23 +29,31 @@ import { ref, onMounted } from "vue";
 import { collection, getDocs, onSnapshot, doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 
+const fbCollection = collection(db, "shelby_accessories");
+
 export default {
   name: "DragCarPage",
-  setup() {
+  data() {
+    return {};
+  },
+  methods: {
 
+  },
+  setup() {
     onMounted(() => {
-      onSnapshot(collection(db, "shelby_accessories"), (querySnapshot) => {
+      onSnapshot(fbCollection, (querySnapshot) => {
         const fbItems = [];
         querySnapshot.forEach((doc) => {
           const item = {
             id: doc.id,
             name: doc.data().name,
             isCorrect: doc.data().isCorrect,
-            categoryId: doc.data().categoryId
+            categoryId: 2
           };
           fbItems.push(item);
         });
         items.value = fbItems;
+        // console.log(items.value)
       });
     });
 
@@ -72,21 +80,33 @@ export default {
       // console.log(typeof item.id);
     }
 
+    // const fbChange = categoryId => {
+    //   updateDoc(doc(fbCollection, categoryId), {
+    //     categoryId: 2
+    //   });
+    // }
+
     function onDrop(ev, categoryId) {
       const itemID = parseInt(ev.dataTransfer.getData("itemID"));
-      // console.log(items.value)
-      items.value = items.value.map((x) => {
-        // console.log(typeof x.id);
-        // console.log(typeof itemID);
-        if (x.id === itemID) {
-          updateDoc(doc(collection(db, "shelby_accessories"), categoryId), {
-            categoryId: 2
-          });
+
+      // updateDoc(doc(fbCollection, categoryId), {
+      //   categoryId: 2
+      // });
+
+      let items2 = items.value.map((x) => {
+        if (+x.id === itemID) {
+          // updateDoc(doc(fbCollection, categoryId), {
+          //   categoryId: 2
+          // });
           x.categoryId = 2;
+          categoryId = 2;
         }
-        console.log(x.categoryId);
+        // console.log(typeof x.categoryId);
+        console.log(x.categoryId)
         return x;
       });
+        // console.log(items2);
+
     }
 
     return {
