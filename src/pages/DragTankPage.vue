@@ -109,7 +109,6 @@ export default defineComponent({
         this.shuffle(this.allAccessories.Guns);
         this.shuffle(this.allAccessories.Engines);
         this.shuffle(this.allAccessories.Suspensions);
-        // this.allAccessories.Guns.sort(() => Math.random() - 0.5);
       });
   },
   methods: {

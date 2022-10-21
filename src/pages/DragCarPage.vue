@@ -21,12 +21,13 @@
         </div>
       </div>
     </div>
+    <button class="btn btn-success">Check</button>
   </div>
 </template>
 
 <script>
 import { ref, onMounted } from "vue";
-import { collection, getDocs, onSnapshot, doc, updateDoc } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/firebase";
 
 const fbCollection = collection(db, "shelby_accessories");
@@ -48,65 +49,37 @@ export default {
             id: doc.id,
             name: doc.data().name,
             isCorrect: doc.data().isCorrect,
-            categoryId: 2
+            categoryId: doc.data().categoryId
           };
           fbItems.push(item);
         });
-        items.value = fbItems;
-        // console.log(items.value)
+        items.value = fbItems.sort(() => Math.random() - 0.5);
       });
     });
 
     const items = ref([
-      // { name: "Item 1", id: 1, categoryId: 1 },
-      // { name: "Item 2", id: 2, categoryId: 1 },
-      // { name: "Item 3", id: 3, categoryId: 1 },
-      // { name: "Item 4", id: 4, categoryId: 1 },
-      // { name: "Item 5", id: 5, categoryId: 1 },
-      // { name: "Item 6", id: 6, categoryId: 1 },
-      // { name: "Item 7", id: 7, categoryId: 1 },
-      // { name: "Item 8", id: 8, categoryId: 1 }
     ]);
 
     const categories = ref([
       { name: "All accessories", id: 1 },
-      { name: "Car", id: 2 }
+      { name: "Suitable accessories", id: 2 }
     ]);
 
     function onDragStart(ev, item) {
       ev.dataTransfer.dropEffect = "move";
       ev.dataTransfer.effectAllowed = "move";
       ev.dataTransfer.setData("itemID", item.id);
-      // console.log(typeof item.id);
     }
 
-    // const fbChange = categoryId => {
-    //   updateDoc(doc(fbCollection, categoryId), {
-    //     categoryId: 2
-    //   });
-    // }
-
     function onDrop(ev, categoryId) {
-      const itemID = parseInt(ev.dataTransfer.getData("itemID"));
+      const itemID = ev.dataTransfer.getData("itemID");
 
-      // updateDoc(doc(fbCollection, categoryId), {
-      //   categoryId: 2
-      // });
-
-      let items2 = items.value.map((x) => {
-        if (+x.id === itemID) {
-          // updateDoc(doc(fbCollection, categoryId), {
-          //   categoryId: 2
-          // });
-          x.categoryId = 2;
-          categoryId = 2;
+      items.value = items.value.map((x) => {
+        if (x.id === itemID) {
+          x.categoryId = categoryId;
         }
-        // console.log(typeof x.categoryId);
-        console.log(x.categoryId)
         return x;
       });
-        // console.log(items2);
-
     }
 
     return {
@@ -127,9 +100,7 @@ export default {
   @include background();
   display: flex;
   justify-content: center;
-  //gap: 40px;
-  //min-height: 100%;
-  //overflow: auto;
+  position: relative;
 }
 
 .column {
@@ -137,8 +108,7 @@ export default {
   justify-content: space-between;
   align-items: stretch;
   flex-basis: 55%;
-  background: rgb(250, 232, 112);
-  //min-height: 1000px;
+  background: var(--color-bg-yellow);
   padding: 20px;
   border-radius: 10px;
   overflow: auto;
@@ -146,13 +116,11 @@ export default {
 }
 
 .column-item {
-  background: rgb(94, 94, 243);
+  background: var(--color-bg-medium-blue);
   padding: 10px;
   border-radius: 5px;
-  min-height: 2200px;
-  //height: 1000px;
-  //min-width: 150px;
-  flex-basis: 43%;
+  min-height: 3200px;
+  flex-basis: 40%;
 }
 
 .column-item h2 {
@@ -164,11 +132,19 @@ export default {
 }
 
 .item {
-  background: rgb(84, 189, 96);
+  background: var(--color-bg-medium-green);
   margin: 20px;
   padding: 10px;
   border-radius: 3px;
   text-align: center;
   color: #262223;
+}
+
+.btn {
+  position: absolute;
+  top: 8%;
+  right: 10%;
+  //margin: 10px;
+  //align-self: flex-start;
 }
 </style>
