@@ -21,7 +21,19 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-success">Check</button>
+    <button class="btn btn-success check" @click="checkCar(); showModal()">Check</button>
+    <button
+      type="button"
+      class="btn btn-info help"
+      @click="showHelp"
+      title="Click and look to console"
+    >
+      Help
+    </button>
+    <modal-window v-show="isModalVisible && isCorrectAccessory" @close="closeModal"></modal-window>
+    <modal-window v-show="isModalVisible && !isCorrectAccessory" @close="closeModal">
+      <template v-slot:body>No, you're not right!</template>
+    </modal-window>
   </div>
 </template>
 
@@ -29,16 +41,53 @@
 import { ref, onMounted } from "vue";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/firebase";
+import ModalWindow from "@/components/ModalWindow";
 
 const fbCollection = collection(db, "shelby_accessories");
 
 export default {
   name: "DragCarPage",
   data() {
-    return {};
+    return {
+      isModalVisible: false,
+      isCorrectAccessory: false
+    };
+  },
+  components: {
+    ModalWindow
   },
   methods: {
-
+    checkCar() {
+      let itemArrayRight = [];
+      let itemArrayAll = [];
+      this.items.forEach((item) => {
+        if (item.categoryId === 2 && item.isCorrect === true) {
+          itemArrayRight.push(item);
+        }
+        if (item.categoryId === 2) {
+          itemArrayAll.push(item);
+        }
+      });
+      if (itemArrayRight.length === 6 && itemArrayAll.length === 6) {
+        this.isCorrectAccessory = true;
+      } else {
+        this.isCorrectAccessory = false;
+      }
+    },
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    },
+    showHelp() {
+      this.items.forEach((item) => {
+          if (item.isCorrect === true) {
+            console.log(item.name);
+          }
+        }
+      );
+    }
   },
   setup() {
     onMounted(() => {
@@ -57,12 +106,11 @@ export default {
       });
     });
 
-    const items = ref([
-    ]);
+    const items = ref([]);
 
     const categories = ref([
       { name: "All accessories", id: 1 },
-      { name: "Suitable accessories", id: 2 }
+      { name: "All suitable accessories", id: 2 }
     ]);
 
     function onDragStart(ev, item) {
@@ -78,6 +126,7 @@ export default {
         if (x.id === itemID) {
           x.categoryId = categoryId;
         }
+        // console.log(x.isCorrect)
         return x;
       });
     }
@@ -137,14 +186,18 @@ export default {
   padding: 10px;
   border-radius: 3px;
   text-align: center;
-  color: #262223;
+  color: var(--color-light-black);
 }
 
-.btn {
+.check {
   position: absolute;
   top: 8%;
   right: 10%;
-  //margin: 10px;
-  //align-self: flex-start;
+}
+
+.help {
+  position: absolute;
+  top: 18%;
+  right: 10%;
 }
 </style>
