@@ -1,5 +1,13 @@
 <template>
   <div class="drag">
+    <div class="task">
+      <div>Choose</div>
+      <div>all</div>
+      <div>accessories</div>
+      <div>of</div>
+      <div>Shelby</div>
+      <div>Cobra</div>
+    </div>
     <div class="column">
       <div
         v-for="category in categories"
@@ -9,7 +17,7 @@
         @dragenter.prevent
         @dragover.prevent
       >
-        <h2>{{ category.name }}</h2>
+        <h2 id="top">{{ category.name }}</h2>
         <div
           v-for="item in items.filter((x) => x.categoryId === category.id)"
           @dragstart="onDragStart($event, item)"
@@ -23,13 +31,13 @@
     </div>
     <button class="btn btn-success check" @click="checkCar(); showModal()">Check</button>
     <button
-      type="button"
       class="btn btn-info help"
       @click="showHelp"
       title="Click and look to console"
     >
       Help
     </button>
+    <button class="btn btn-dark up" @click="toTop">Up</button>
     <modal-window v-show="isModalVisible && isCorrectAccessory" @close="closeModal"></modal-window>
     <modal-window v-show="isModalVisible && !isCorrectAccessory" @close="closeModal">
       <template v-slot:body>No, you're not right!</template>
@@ -87,7 +95,12 @@ export default {
           }
         }
       );
-    }
+    },
+    toTop() {
+      document.querySelector("#top").scrollIntoView({
+        behavior: "smooth"
+      });
+    },
   },
   setup() {
     onMounted(() => {
@@ -150,18 +163,36 @@ export default {
   display: flex;
   justify-content: center;
   position: relative;
+
+  .task {
+    position: absolute;
+    top: 2%;
+    left: 5%;
+
+    div {
+      background: var(--color-bg-task);
+      border-radius: 20px;
+      margin-top: 5px;
+      padding: 5px;
+    }
+  }
 }
 
 .column {
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
   flex-basis: 55%;
   background: var(--color-bg-yellow);
   padding: 20px;
   border-radius: 10px;
   overflow: auto;
   opacity: 0.88;
+  transition: all 0.5s ease-out;
+
+  &:hover {
+    opacity: 0.96;
+    transition: all 0.5s ease-in;
+  }
 }
 
 .column-item {
@@ -198,6 +229,12 @@ export default {
 .help {
   position: absolute;
   top: 18%;
+  right: 10%;
+}
+
+.up {
+  position: absolute;
+  bottom: 10%;
   right: 10%;
 }
 </style>

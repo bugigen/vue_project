@@ -34,9 +34,6 @@
           class="draggable"
           draggable=".item"
         >
-          <!--          <template v-for="i in 12">-->
-          <!--            <tank-item v-for="accessory in allAccessories" :key="accessory.id" :item="accessory[i-1]"></tank-item>-->
-          <!--          </template>-->
           <div class="itemName">Guns</div>
           <tank-item
             v-for="accessory in allAccessories.Guns"
@@ -146,7 +143,7 @@ export default defineComponent({
       document.querySelector("#top").scrollIntoView({
         behavior: "smooth"
       });
-    }
+    },
   }
 });
 </script>
@@ -216,7 +213,7 @@ export default defineComponent({
   text-align: center;
   border-radius: 4px;
   background: var(--color-bg-green);
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 3px var(--color-shadow);
   transition: all 0.3s ease-in-out;
   &:hover{
     background: var(--color-bg-dark-green);

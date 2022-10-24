@@ -47,4 +47,8 @@ body {
   color: var(--color-font);
   cursor: default;
 }
+
+.wrapper {
+  position: relative;
+}
 </style>

@@ -61,14 +61,14 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: var(--color-modal-backdrop);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .modal-window {
-  background: #FFFFFF;
+  background: var(--color-white);
   box-shadow: 2px 2px 20px 1px;
   overflow-x: auto;
   display: flex;
@@ -83,13 +83,13 @@ export default {
 
 .modal-header {
   position: relative;
-  border-bottom: 1px solid #eeeeee;
-  color: #4AAE9B;
+  border-bottom: 1px solid var(--color-white);
+  color: var(--color-modal-green);
   justify-content: space-between;
 }
 
 .modal-footer {
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid var(--color-white);
   flex-direction: column;
   justify-content: flex-end;
 }
@@ -108,14 +108,14 @@ export default {
   padding: 10px;
   cursor: pointer;
   font-weight: bold;
-  color: #4AAE9B;
+  color: var(--color-modal-green);
   background: transparent;
 }
 
 .btn-green {
-  color: white;
-  background: #4AAE9B;
-  border: 1px solid #4AAE9B;
+  color: var(--color-white);
+  background: var(--color-modal-green);
+  border: 1px solid var(--color-modal-green);
   border-radius: 2px;
 }
 
