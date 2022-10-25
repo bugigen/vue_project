@@ -23,7 +23,26 @@
         </template>
       </div>
       <button class="btn btn-success" @click="verifyTank">Verify</button>
-      <button class="btn btn-info help" @click="help">Help</button>
+      <button class="btn btn-info help" @click="help" data-bs-toggle="modal" data-bs-target="#exampleModal">Help
+      </button>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              {{this.$store.state.accessoriesKV_4 }}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="task">
@@ -155,7 +174,7 @@ export default defineComponent({
     },
     help() {
 
-    },
+    }
   }
 });
 </script>
@@ -218,6 +237,7 @@ export default defineComponent({
 
 .tankImage {
   height: 60px;
+
   img {
     width: 100%;
     height: 100%;
@@ -237,13 +257,16 @@ export default defineComponent({
   background: var(--color-bg-green);
   box-shadow: 0 0 0 3px var(--color-shadow);
   transition: all 0.3s ease-in-out;
-  &:hover{
+
+  &:hover {
     background: var(--color-bg-dark-green);
+
     svg {
       fill: var(--color-white);
       transition: all 0.3s ease-in-out;
     }
   }
+
   svg {
     position: relative;
     transition: all 0.3s ease-in-out;
