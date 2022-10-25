@@ -38,6 +38,7 @@
       Help
     </button>
     <button class="btn btn-dark up" @click="toTop">Up</button>
+
     <modal-window v-show="isModalVisible && isCorrectAccessory" @close="closeModal"></modal-window>
     <modal-window v-show="isModalVisible && !isCorrectAccessory" @close="closeModal">
       <template v-slot:body>No, you're not right!</template>
@@ -158,24 +159,25 @@ export default {
 @import "@/styles/variables.scss";
 
 .drag {
-  background: url(@/assets/images/Car.jpg) 50% 50% no-repeat;
-  @include background();
   display: flex;
   justify-content: center;
   position: relative;
+  background: url(@/assets/images/Car.jpg) 50% 50% no-repeat;
+  @include task();
+  @include background();
 
-  .task {
-    position: absolute;
-    top: 2%;
-    left: 5%;
-
-    div {
-      background: var(--color-bg-task);
-      border-radius: 20px;
-      margin-top: 5px;
-      padding: 5px;
-    }
-  }
+  //.task {
+  //  position: absolute;
+  //  top: 2%;
+  //  left: 5%;
+  //
+  //  div {
+  //    background: var(--color-bg-task);
+  //    border-radius: 20px;
+  //    margin-top: 5px;
+  //    padding: 5px;
+  //  }
+  //}
 }
 
 .column {
@@ -234,7 +236,7 @@ export default {
 
 .up {
   position: absolute;
-  bottom: 10%;
+  bottom: 8%;
   right: 10%;
 }
 </style>

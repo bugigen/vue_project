@@ -19,7 +19,7 @@ $colors: (
         "modal-green": #3a8677,
         "modal-backdrop": #0000006e,
         "orange": #fd7e14ff,
-        "bg-task": #edececff,
+        "bg-task": #edecece5,
         "shadow": #00000033,
 );
 
@@ -33,4 +33,19 @@ $colors: (
   text-align: center;
   height: calc(100vh - 62px);
   background-size: cover;
+}
+
+@mixin task() {
+  .task {
+    position: absolute;
+    top: 2%;
+    left: 5%;
+
+    div {
+      background: var(--color-bg-task);
+      border-radius: 20px;
+      margin-top: 5px;
+      padding: 5px;
+    }
+  }
 }

@@ -23,6 +23,15 @@
         </template>
       </div>
       <button class="btn btn-success" @click="verifyTank">Verify</button>
+      <button class="btn btn-info help" @click="help">Help</button>
+    </div>
+
+    <div class="task">
+      <div>Choose</div>
+      <div>accessories</div>
+      <div>of the</div>
+      <div>selected</div>
+      <div>tank</div>
     </div>
 
     <div class="wrapper">
@@ -144,6 +153,9 @@ export default defineComponent({
         behavior: "smooth"
       });
     },
+    help() {
+
+    },
   }
 });
 </script>
@@ -156,19 +168,29 @@ export default defineComponent({
   overflow: auto;
   background: url(@/assets/images/Tank2.jpg) 50% 50% no-repeat;
   @include background();
+  @include task();
 }
 
 .chooseTank {
+  position: relative;
   padding: 10px 0 0;
   font-size: 1.3em;
   display: flex;
   justify-content: center;
   gap: 20px;
+
   select {
     font-size: 0.7em;
   }
+
   span {
     color: var(--color-font);
+  }
+
+  .help {
+    position: absolute;
+    top: 20%;
+    right: 8%;
   }
 }
 
