@@ -165,19 +165,6 @@ export default {
   background: url(@/assets/images/Car.jpg) 50% 50% no-repeat;
   @include task();
   @include background();
-
-  //.task {
-  //  position: absolute;
-  //  top: 2%;
-  //  left: 5%;
-  //
-  //  div {
-  //    background: var(--color-bg-task);
-  //    border-radius: 20px;
-  //    margin-top: 5px;
-  //    padding: 5px;
-  //  }
-  //}
 }
 
 .column {
@@ -225,18 +212,18 @@ export default {
 .check {
   position: absolute;
   top: 8%;
-  right: 10%;
+  right: 6%;
 }
 
 .help {
   position: absolute;
   top: 18%;
-  right: 10%;
+  right: 6%;
 }
 
 .up {
   position: absolute;
   bottom: 8%;
-  right: 10%;
+  right: 6%;
 }
 </style>

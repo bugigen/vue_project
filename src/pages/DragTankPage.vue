@@ -8,6 +8,7 @@
         <option value="ИС-3">ИС-3</option>
         <option value="СУ-101">СУ-101</option>
       </select>
+
       <div class="tankImage">
         <template v-if="tankSelect==='КВ-4'">
           <img src="@/assets/images/Tank_images/KV-4.jpg" alt="KV-4">
@@ -22,23 +23,36 @@
           <img src="@/assets/images/Tank_images/Default_Tanks.jpg" alt="Choose">
         </template>
       </div>
+
       <button class="btn btn-success" @click="verifyTank">Verify</button>
-      <button class="btn btn-info help" @click="help" data-bs-toggle="modal" data-bs-target="#exampleModal">Help
+      <button class="btn btn-info help" data-bs-toggle="modal" data-bs-target="#exampleModal">Help
       </button>
 
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="exampleModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Accessories for tanks</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-              {{this.$store.state.accessoriesKV_4 }}
+              <p><u>&nbsp;КВ-4&nbsp;</u></p>
+              <div v-for="state in this.$store.state.accessoriesKV_4" :key="state">
+                {{ state }}
+              </div>
+              <br>
+              <p><u>&nbsp;ИС-3&nbsp;</u></p>
+              <div v-for="state in this.$store.state.accessoriesIS_3" :key="state">
+                {{ state }}
+              </div>
+              <br>
+              <p><u>&nbsp;СУ-101&nbsp;</u></p>
+              <div v-for="state in this.$store.state.accessoriesSU_101" :key="state">
+                {{ state }}
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
             </div>
           </div>
         </div>
@@ -118,7 +132,7 @@ export default defineComponent({
       enabled: true,
       dragging: false,
       allAccessories: [],
-      url: "https://run.mocky.io/v3/d4b55493-5a4e-41a7-ac93-04c758e59799",
+      url: "https://run.mocky.io/v3/41b0fa69-3295-4540-a844-6890d7cb1e01",
       tankSelect: ""
     };
   },
@@ -144,9 +158,9 @@ export default defineComponent({
       }
     },
     verifyTank() {
-      let includeKV_4;
-      let includeIS_3;
-      let includeSU_101;
+      let includeKV_4 = false;
+      let includeIS_3 = false;
+      let includeSU_101 = false;
       let items = document.querySelectorAll("#suitableAccessories .item");
 
       items.forEach((item) => {
@@ -155,11 +169,11 @@ export default defineComponent({
         includeSU_101 = this.$store.state.accessoriesSU_101.includes(item.textContent.trim());
       });
 
-      if (includeKV_4 && this.tankSelect === "КВ-4") {
+      if (includeKV_4 === true && this.tankSelect === "КВ-4" && includeIS_3 === false && includeSU_101 === false) {
         alert("Correct");
-      } else if (includeIS_3 && this.tankSelect === "ИС-3") {
+      } else if (includeIS_3 === true && this.tankSelect === "ИС-3" && includeKV_4 === false && includeSU_101 === false) {
         alert("Correct");
-      } else if (includeSU_101 && this.tankSelect === "СУ-101") {
+      } else if (includeSU_101 === true && this.tankSelect === "СУ-101" && includeKV_4 === false && includeIS_3 === false) {
         alert("Correct");
       } else if (this.tankSelect === "") {
         alert("Choose tank");
@@ -172,9 +186,6 @@ export default defineComponent({
         behavior: "smooth"
       });
     },
-    help() {
-
-    }
   }
 });
 </script>
@@ -271,5 +282,9 @@ export default defineComponent({
     position: relative;
     transition: all 0.3s ease-in-out;
   }
+}
+
+.modal-body {
+  font-size: 0.8em;
 }
 </style>

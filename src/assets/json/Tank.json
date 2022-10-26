@@ -15,7 +15,7 @@
       "id": 2,
       "id_name": "Пушка",
       "image": "assets/images/Tank_images/Gun.png",
-      "name": "122 мм Д-2-5Т",
+      "name": "122 мм Д-2-5ТС",
       "penetration": 175,
       "damage": 390,
       "rate_of_fire": 4.08,
