@@ -157,23 +157,30 @@ export default defineComponent({
         [arr[i], arr[j]] = [arr[j], arr[i]];
       }
     },
+
     verifyTank() {
-      let includeKV_4 = false;
-      let includeIS_3 = false;
-      let includeSU_101 = false;
+      let includeKV_4 = 0;
+      let includeIS_3 = 0;
+      let includeSU_101 = 0;
       let items = document.querySelectorAll("#suitableAccessories .item");
 
       items.forEach((item) => {
-        includeKV_4 = this.$store.state.accessoriesKV_4.includes(item.textContent.trim());
-        includeIS_3 = this.$store.state.accessoriesIS_3.includes(item.textContent.trim());
-        includeSU_101 = this.$store.state.accessoriesSU_101.includes(item.textContent.trim());
+        if (this.$store.state.accessoriesKV_4.includes(item.textContent.trim())) {
+          includeKV_4 += 1;
+        }
+        if (this.$store.state.accessoriesIS_3.includes(item.textContent.trim())) {
+          includeIS_3 += 1;
+        }
+        if (this.$store.state.accessoriesSU_101.includes(item.textContent.trim())) {
+          includeSU_101 += 1;
+        }
       });
 
-      if (includeKV_4 === true && this.tankSelect === "КВ-4" && includeIS_3 === false && includeSU_101 === false) {
+      if (includeKV_4 > 0 && this.tankSelect === "КВ-4" && includeIS_3 === 0 && includeSU_101 === 0) {
         alert("Correct");
-      } else if (includeIS_3 === true && this.tankSelect === "ИС-3" && includeKV_4 === false && includeSU_101 === false) {
+      } else if (includeIS_3 > 0 && this.tankSelect === "ИС-3" && includeKV_4 === 0 && includeSU_101 === 0) {
         alert("Correct");
-      } else if (includeSU_101 === true && this.tankSelect === "СУ-101" && includeKV_4 === false && includeIS_3 === false) {
+      } else if (includeSU_101 > 0 && this.tankSelect === "СУ-101" && includeKV_4 === 0 && includeIS_3 === 0) {
         alert("Correct");
       } else if (this.tankSelect === "") {
         alert("Choose tank");
@@ -181,11 +188,12 @@ export default defineComponent({
         alert("Wrong!");
       }
     },
+
     toTop() {
       document.querySelector("#top").scrollIntoView({
         behavior: "smooth"
       });
-    },
+    }
   }
 });
 </script>

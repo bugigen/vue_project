@@ -174,7 +174,8 @@ export default {
   background: var(--color-bg-yellow);
   padding: 20px;
   border-radius: 10px;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   opacity: 0.88;
   transition: all 0.5s ease-out;
 

@@ -18,5 +18,6 @@ export default {
 .main {
   background: url(@/assets/images/Tank.jpg) 50% 50% no-repeat;
   @include background();
+  color: var(--color-bg-task);
 }
 </style>
