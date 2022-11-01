@@ -13,7 +13,7 @@
       </ul>
     </li>
     <li class="nav-item">
-      <a class="nav-link" @click="$router.push('/api')">Vacancies on trudvsem.ru</a>
+      <a class="nav-link" @click="$router.push('/api')">trudvsem.ru</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" @click="$router.push('/bitcoin')">Bitcoin</a>
