@@ -9,19 +9,15 @@
       <button class="btn btn-success" @click="getJobs(urlUdmurtia)">Get</button>
     </div>
     <div class="category">
-      Get profession "Программист" in Udmurt Republic &nbsp;
-      <button class="btn btn-success" @click="getJobs(urlUdmurtiaProg)">Get</button>
-    </div>
-    <div class="category">
-      <label for="searchProfession" class="form-label me-2">Enter profession</label>
+      <label for="searchProfession" class="form-label me-2">Enter profession</label> <br>
       <input
-        type="email"
-        class="form-control w-50 d-inline"
+        type="text"
+        class="form-control w-25 d-inline"
         id="searchProfession"
-        placeholder="озеленитель"
+        placeholder="например: доярка"
         v-model="searchProfession"
       > &nbsp;
-      <button class="btn btn-success" @click="getJobs(urlProfession)">Find</button>
+      <button class="btn btn-outline-primary" @click="getJobs(urlProfession)">Find</button>
     </div>
 
     <table class="table table-info table-hover table-bordered border-success align-middle">
@@ -30,9 +26,6 @@
       </template>
       <template v-else-if="this.url === this.urlRussia">
         <caption>Russia</caption>
-      </template>
-      <template v-else-if="this.url === this.urlUdmurtiaProg">
-        <caption>"Программист" in Udmurt Republic</caption>
       </template>
       <template v-else>
         <caption>&nbsp;</caption>
@@ -49,13 +42,31 @@
       <tbody>
       <tr v-for="job in jobs" :key="job.vacancy.id">
         <td></td>
-        <td><a :href="job.vacancy.vac_url" target="_blank">{{ job.vacancy["job-name"] }}</a></td>
+        <td>
+          <a :href="job.vacancy.vac_url" target="_blank" title="Детали">{{ job.vacancy["job-name"] }}</a>
+        </td>
         <td>{{ job.vacancy.salary }}</td>
         <td>{{ job.vacancy.company.name }}</td>
         <td>{{ job.vacancy["creation-date"] }}</td>
       </tr>
       </tbody>
     </table>
+
+    <!--    <nav class="pagination-block">-->
+    <!--      <ul class="pagination">-->
+    <!--        <li class="page-item" v-for="page in totalPages" :key="page">-->
+    <!--          <a href="#" class="page-link">-->
+    <!--            {{ page }}-->
+    <!--          </a>-->
+    <!--        </li>-->
+    <!--      </ul>-->
+    <!--    </nav>-->
+
+    <div class="pagination-wrapper">
+      <div v-for="page in totalPages" :key="page" class="pagination-page">
+        {{ page }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -66,18 +77,28 @@ export default {
     return {
       jobs: null,
       errorMessage: null,
-      urlRussia: "http://opendata.trudvsem.ru/api/v1/vacancies",
-      urlUdmurtia: "http://opendata.trudvsem.ru/api/v1/vacancies/region/18",
-      urlUdmurtiaProg: "http://opendata.trudvsem.ru/api/v1/vacancies/region/18?text=" +
-        encodeURIComponent("Программист"),
+      // urlRussia: "http://opendata.trudvsem.ru/api/v1/vacancies" + "?offset=" + this.offset +
+      //   "&limit=" + this.limit,
+      // urlUdmurtia: "http://opendata.trudvsem.ru/api/v1/vacancies/region/18",
       url: null,
       searchProfession: null,
+      offset: 1,
+      limit: 50,
+      totalPages: 0
     };
   },
   computed: {
+    urlRussia() {
+      return "http://opendata.trudvsem.ru/api/v1/vacancies" + "?offset=" + this.offset +
+        "&limit=" + this.limit;
+    },
+    urlUdmurtia() {
+      return "http://opendata.trudvsem.ru/api/v1/vacancies/region/18" + "?offset=" + this.offset +
+        "&limit=" + this.limit;
+    },
     urlProfession() {
       return "http://opendata.trudvsem.ru/api/v1/vacancies/region/18?text=" +
-      encodeURIComponent(this.searchProfession)
+        encodeURIComponent(this.searchProfession);
     }
   },
   methods: {
@@ -92,6 +113,8 @@ export default {
           }
           this.jobs = data.results.vacancies;
           this.url = response.url;
+          this.totalPages = Math.ceil(data.meta.total / this.limit);
+          // console.log(this.totalPages);
         })
         .catch(error => {
           this.errorMessage = error;
@@ -111,7 +134,6 @@ export default {
   @include background();
   color: var(--color-bg-task);
   overflow: auto;
-  //overflow-x: hidden;
   font-size: 0.9em;
 }
 
@@ -140,9 +162,18 @@ export default {
   tr td:first-child::before {
     content: counter(rowNumber);
   }
-
-  td {
-    //max-width: 150px;
-  }
 }
+
+  .pagination-wrapper {
+    display: flex;
+    margin-top: 15px;
+    flex-wrap: wrap;
+
+    .pagination-page {
+      border: 1px solid #444;
+      padding: 10px;
+      margin: 3px;
+    }
+  }
+
 </style>
