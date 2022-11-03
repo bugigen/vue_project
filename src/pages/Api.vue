@@ -1,30 +1,38 @@
 <template>
   <div class="api">
     <div class="category">
-      Get all vacancies in Russia &nbsp;
-      <button class="btn btn-success" @click="getJobs(urlRussia)">Get</button>
-    </div>
-    <div class="category">
+      Get vacancies in Russia &nbsp;
+      <button class="btn btn-success" @click="getJobs(urlRussia)">Get</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       Get vacancies in Udmurt Rebublic &nbsp;
       <button class="btn btn-success" @click="getJobs(urlUdmurtia)">Get</button>
     </div>
     <div class="category">
-      <label for="searchProfession" class="form-label me-2">Enter profession</label> <br>
+      <label for="searchProfession" class="form-label me-2">Search profession </label> <br>
       <input
         type="text"
         class="form-control w-25 d-inline"
         id="searchProfession"
-        placeholder="например: доярка"
+        placeholder="in Udmurt Republic"
         v-model="searchProfession"
       > &nbsp;
       <button class="btn btn-outline-primary" @click="getJobs(urlProfession)">Find</button>
+
+      <label for="searchProfessionRussia" class="form-label me-2"> </label>
+      <input
+        type="text"
+        class="form-control w-25 d-inline"
+        id="searchProfessionRussia"
+        placeholder="in Russia"
+        v-model="searchProfessionRussia"
+      > &nbsp;
+      <button class="btn btn-outline-primary" @click="getJobs(urlProfessionRussia)">Find</button>
     </div>
 
     <table class="table table-info table-hover table-bordered border-success align-middle">
-      <template v-if="this.url === this.urlUdmurtia">
+      <template v-if="this.url && this.url.includes('http://opendata.trudvsem.ru/api/v1/vacancies/region/18?')">
         <caption>Udmurt Rebublic</caption>
       </template>
-      <template v-else-if="this.url === this.urlRussia">
+      <template v-else-if="this.url && this.url.includes('http://opendata.trudvsem.ru/api/v1/vacancies?')">
         <caption>Russia</caption>
       </template>
       <template v-else>
@@ -52,19 +60,17 @@
       </tbody>
     </table>
 
-    <!--    <nav class="pagination-block">-->
-    <!--      <ul class="pagination">-->
-    <!--        <li class="page-item" v-for="page in totalPages" :key="page">-->
-    <!--          <a href="#" class="page-link">-->
-    <!--            {{ page }}-->
-    <!--          </a>-->
-    <!--        </li>-->
-    <!--      </ul>-->
-    <!--    </nav>-->
-
     <div class="pagination-wrapper">
-      <div v-for="page in totalPages" :key="page" class="pagination-page">
-        {{ page }}
+      <div
+        v-for="pageNumber in totalPages"
+        :key="pageNumber"
+        class="pagination-page"
+        :class="{
+          'current-page': offset === pageNumber
+        }"
+        @click="changePage(pageNumber)"
+      >
+        {{ pageNumber }}
       </div>
     </div>
   </div>
@@ -77,13 +83,11 @@ export default {
     return {
       jobs: null,
       errorMessage: null,
-      // urlRussia: "http://opendata.trudvsem.ru/api/v1/vacancies" + "?offset=" + this.offset +
-      //   "&limit=" + this.limit,
-      // urlUdmurtia: "http://opendata.trudvsem.ru/api/v1/vacancies/region/18",
       url: null,
       searchProfession: null,
+      searchProfessionRussia: null,
       offset: 1,
-      limit: 50,
+      limit: 100,
       totalPages: 0
     };
   },
@@ -98,8 +102,12 @@ export default {
     },
     urlProfession() {
       return "http://opendata.trudvsem.ru/api/v1/vacancies/region/18?text=" +
-        encodeURIComponent(this.searchProfession);
-    }
+        encodeURIComponent(this.searchProfession) + "&offset=" + this.offset + "&limit=" + this.limit;
+    },
+    urlProfessionRussia() {
+      return "http://opendata.trudvsem.ru/api/v1/vacancies?text=" +
+        encodeURIComponent(this.searchProfessionRussia) + "&offset=" + this.offset + "&limit=" + this.limit;
+    },
   },
   methods: {
     getJobs(url) {
@@ -114,12 +122,30 @@ export default {
           this.jobs = data.results.vacancies;
           this.url = response.url;
           this.totalPages = Math.ceil(data.meta.total / this.limit);
-          // console.log(this.totalPages);
+          // console.log(typeof this.url);
         })
         .catch(error => {
           this.errorMessage = error;
           console.error("There was an error!", error);
         });
+    },
+    changePage(pageNumber) {
+      this.offset = pageNumber;
+      if (this.url.includes('http://opendata.trudvsem.ru/api/v1/vacancies?') &&
+        this.url.includes('http://opendata.trudvsem.ru/api/v1/vacancies?text=') === false) {
+        this.getJobs(this.urlRussia);
+        // console.log(this.urlRussia)
+      } else if (this.url.includes('http://opendata.trudvsem.ru/api/v1/vacancies/region/18?') &&
+        this.url.includes('http://opendata.trudvsem.ru/api/v1/vacancies/region/18?text=') === false) {
+        this.getJobs(this.urlUdmurtia)
+        // console.log(this.urlUdmurtia)
+      } else if (this.url.includes('http://opendata.trudvsem.ru/api/v1/vacancies/region/18?text=')) {
+        this.getJobs(this.urlProfession)
+        // console.log(this.urlProfession)
+      } else if (this.url.includes('http://opendata.trudvsem.ru/api/v1/vacancies?text=')) {
+        this.getJobs(this.urlProfessionRussia)
+        // console.log(this.urlProfessionRussia)
+      }
     }
   }
 };
@@ -135,11 +161,15 @@ export default {
   color: var(--color-bg-task);
   overflow: auto;
   font-size: 0.9em;
-}
 
-.category {
-  margin: 10px 0 20px 10px;
-  text-align: left;
+  .category {
+    margin: 10px 0 20px 10px;
+    text-align: left;
+  }
+
+  #searchProfessionRussia {
+    margin-left: 50px;
+  }
 }
 
 .table {
@@ -164,16 +194,23 @@ export default {
   }
 }
 
-  .pagination-wrapper {
-    display: flex;
-    margin-top: 15px;
-    flex-wrap: wrap;
+.pagination-wrapper {
+  display: flex;
+  margin: 15px 10px;
+  flex-wrap: wrap;
 
-    .pagination-page {
-      border: 1px solid #444;
-      padding: 10px;
-      margin: 3px;
-    }
+  .pagination-page {
+    border: 1px solid var(--color-pagination-page);
+    padding: 2px;
+    margin: 2px;
+    width: 50px;
+    font-size: 0.7em;
   }
+
+  .current-page {
+    border: 1px solid var(--color-bg-teal);
+    color: var(--color-bg-teal);
+  }
+}
 
 </style>
