@@ -48,8 +48,8 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="job in jobs" :key="job.vacancy.id">
-        <td></td>
+      <tr v-for="(job, index) in jobs" :key="job.vacancy.id">
+        <td>{{ (index + 1) + 100 * (this.offset - 1) }}</td>
         <td>
           <a :href="job.vacancy.vac_url" target="_blank" title="Детали">{{ job.vacancy["job-name"] }}</a>
         </td>
@@ -62,15 +62,31 @@
 
     <div class="pagination-wrapper">
       <div
+        v-show="offset > 6"
+        class="pagination-page bigger-width"
+        @click="changePage(1)"
+      >
+        1 ...
+      </div>
+      <div
         v-for="pageNumber in totalPages"
         :key="pageNumber"
         class="pagination-page"
         :class="{
-          'current-page': offset === pageNumber
+          'current-page': offset === pageNumber,
+          'pagination-slice-right': pageNumber > offset + 5,
+          'pagination-slice-left': pageNumber < offset - 5,
         }"
         @click="changePage(pageNumber)"
       >
         {{ pageNumber }}
+      </div>
+      <div
+        v-show="offset < totalPages - 5"
+        class="pagination-page bigger-width"
+        @click="changePage(totalPages)"
+      >
+        ... {{totalPages}}
       </div>
     </div>
   </div>
@@ -88,7 +104,7 @@ export default {
       searchProfessionRussia: null,
       offset: 1,
       limit: 100,
-      totalPages: 0
+      totalPages: 0,
     };
   },
   computed: {
@@ -107,7 +123,7 @@ export default {
     urlProfessionRussia() {
       return "http://opendata.trudvsem.ru/api/v1/vacancies?text=" +
         encodeURIComponent(this.searchProfessionRussia) + "&offset=" + this.offset + "&limit=" + this.limit;
-    },
+    }
   },
   methods: {
     getJobs(url) {
@@ -122,7 +138,6 @@ export default {
           this.jobs = data.results.vacancies;
           this.url = response.url;
           this.totalPages = Math.ceil(data.meta.total / this.limit);
-          // console.log(typeof this.url);
         })
         .catch(error => {
           this.errorMessage = error;
@@ -131,20 +146,16 @@ export default {
     },
     changePage(pageNumber) {
       this.offset = pageNumber;
-      if (this.url.includes('http://opendata.trudvsem.ru/api/v1/vacancies?') &&
-        this.url.includes('http://opendata.trudvsem.ru/api/v1/vacancies?text=') === false) {
+      if (this.url.includes("http://opendata.trudvsem.ru/api/v1/vacancies?") &&
+        this.url.includes("http://opendata.trudvsem.ru/api/v1/vacancies?text=") === false) {
         this.getJobs(this.urlRussia);
-        // console.log(this.urlRussia)
-      } else if (this.url.includes('http://opendata.trudvsem.ru/api/v1/vacancies/region/18?') &&
-        this.url.includes('http://opendata.trudvsem.ru/api/v1/vacancies/region/18?text=') === false) {
-        this.getJobs(this.urlUdmurtia)
-        // console.log(this.urlUdmurtia)
-      } else if (this.url.includes('http://opendata.trudvsem.ru/api/v1/vacancies/region/18?text=')) {
-        this.getJobs(this.urlProfession)
-        // console.log(this.urlProfession)
-      } else if (this.url.includes('http://opendata.trudvsem.ru/api/v1/vacancies?text=')) {
-        this.getJobs(this.urlProfessionRussia)
-        // console.log(this.urlProfessionRussia)
+      } else if (this.url.includes("http://opendata.trudvsem.ru/api/v1/vacancies/region/18?") &&
+        this.url.includes("http://opendata.trudvsem.ru/api/v1/vacancies/region/18?text=") === false) {
+        this.getJobs(this.urlUdmurtia);
+      } else if (this.url.includes("http://opendata.trudvsem.ru/api/v1/vacancies/region/18?text=")) {
+        this.getJobs(this.urlProfession);
+      } else if (this.url.includes("http://opendata.trudvsem.ru/api/v1/vacancies?text=")) {
+        this.getJobs(this.urlProfessionRussia);
       }
     }
   }
@@ -176,21 +187,12 @@ export default {
   font-size: 0.8em;
   max-width: 95vw;
   margin: 20px auto;
-  counter-reset: rowNumber 1;
 
   caption {
     caption-side: top;
     font-size: 1.2em;
     text-align: center;
     color: var(--color-bg-task);
-  }
-
-  tr:not(:first-child) {
-    counter-increment: rowNumber;
-  }
-
-  tr td:first-child::before {
-    content: counter(rowNumber);
   }
 }
 
@@ -200,16 +202,42 @@ export default {
   flex-wrap: wrap;
 
   .pagination-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 1px solid var(--color-pagination-page);
     padding: 2px;
     margin: 2px;
     width: 50px;
     font-size: 0.7em;
+    transition: all 0.5s ease;
+
+    &:hover {
+      color: var(--color-bg-teal);
+      transition: all 0.5s ease;
+    }
+
+    &:first-child {
+      margin-right: 30px;
+    }
+
+    &:last-child {
+      margin-left: 30px;
+    }
   }
 
   .current-page {
     border: 1px solid var(--color-bg-teal);
     color: var(--color-bg-teal);
+  }
+
+  .pagination-slice-right,
+  .pagination-slice-left {
+    display: none;
+  }
+
+  .bigger-width {
+    min-width: 80px;
   }
 }
 
