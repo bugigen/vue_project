@@ -73,6 +73,7 @@ export default {
   overflow-x: auto;
   display: flex;
   flex-direction: column;
+  border-radius: 5px;
 }
 
 .modal-header,
@@ -116,7 +117,7 @@ export default {
   color: var(--color-white);
   background: var(--color-modal-green);
   border: 1px solid var(--color-modal-green);
-  border-radius: 2px;
+  border-radius: 5px;
 }
 
 .modal-fade-enter,
