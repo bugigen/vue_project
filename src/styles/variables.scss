@@ -54,3 +54,21 @@ $colors: (
   }
 }
 
+@mixin image-position() {
+  img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+  }
+
+  h2,
+  p {
+    position: relative;
+    z-index: 2;
+  }
+}
+
