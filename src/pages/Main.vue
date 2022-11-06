@@ -100,6 +100,7 @@ export default {
 @import "@/styles/variables.scss";
 
 .main {
+  position: relative;
   background: url(@/assets/images/Tank_images/Tank_IS-3_photo.png) 50% 50% no-repeat;
   @include background();
   color: var(--color-bg-task);
