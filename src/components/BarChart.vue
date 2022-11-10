@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <canvas id="chart"></canvas>
+    <!--    <canvas id="chart"></canvas>-->
   </div>
 </template>
 
@@ -11,27 +11,41 @@ export default {
   name: "BarChart",
   props: {
     type: String,
-    data: {}
+    data: {},
+    options: {},
+    scales: {},
   },
   methods: {
     getChart() {
+      document.querySelector(".container").innerHTML = "<canvas id=\"chart\"></canvas>";
       const chr = document.querySelector("#chart");
-      const chart = new Chart(chr, {
+      window.chart = new Chart(chr, {
         type: this.type,
-        data: this.data
+        data: this.data,
+        options: this.options,
+        scales: this.scales,
+      });
+      if (window.chart !== null) {
+        window.chart.destroy();
+      }
+      window.chart = new Chart(chr, {
+        type: this.type,
+        data: this.data,
+        options: this.options,
+        scales: this.scales,
       });
       // chart;
     }
   },
-  mounted() {
+  async mounted() {
     this.getChart();
   }
 };
 </script>
 
 <style scoped>
- .container {
-   margin-top: 20px;
-   margin-bottom: 20px;
- }
+.container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 </style>

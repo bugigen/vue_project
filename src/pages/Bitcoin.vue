@@ -11,37 +11,54 @@
       yearn.finance = {{ responseCrypto.YFI.RUB }} rubles <br>
       Digg = {{ responseCrypto.DIGG.USD }} dollars, &nbsp;
       Digg = {{ responseCrypto.DIGG.RUB }} rubles <br>
-      {{responseData}}
-      <bar-chart :type="bar" :data="barData"></bar-chart>
+      {{ responseDataRub }} <br>
+      {{ responseDataUsd }} <br>
+      <button class="btn btn-outline-secondary" @click="toggleBarLine">Line chart</button>
+      <template v-if="isEnabled === true">
+      <bar-chart
+        :type="bar"
+        :data="barData"
+        :options="options"
+        :scales="scales"
+      ></bar-chart>
+      </template>
+      <template v-else>
+        <bar-chart
+          :type="line"
+          :data="lineData"
+          :options="options"
+          :scales="scales"
+        ></bar-chart>
+      </template>
     </template>
   </div>
 </template>
 
 <script>
 import BarChart from "@/components/BarChart";
-import {ref} from "vue";
+// import LineChart from "@/components/LineChart";
+import { ref } from "vue";
 
-let responseData = ref([]);
+let responseDataRub = ref([]);
+let responseDataUsd = ref([]);
 
 export default {
   name: "BitcoinPage",
   components: {
-    BarChart
-  },
-  setup() {
-    return {responseData};
+    BarChart,
+    // LineChart
   },
   data() {
     return {
       responseCrypto: null,
-      // responseData: [],
+      isEnabled: true,
       barName: "Bar Chart",
       bar: "bar",
       barData: {
         labels: ["tBTC (TBTC)", "Bitcoin (BTC)", "Wrapped Bitcoin (WBTC)", "yearn.finance (YFI)", "Digg (DIGG)"],
         datasets: [{
-          label: "Top list cryptocurrencies",
-          data: responseData,
+          label: "Top list cryptocurrencies in rubles",
+          data: responseDataRub,
           backgroundColor: [
             "rgba(17, 50, 64, 0.4)",
             "rgba(94, 72, 0, 0.4)",
@@ -56,6 +73,25 @@ export default {
             "rgba(27, 25, 169, 1.0)",
             "rgba(141, 47, 108, 1.0)"
           ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      line: "line",
+      lineData: {
+        labels: ["tBTC (TBTC)", "Bitcoin (BTC)", "Wrapped Bitcoin (WBTC)", "yearn.finance (YFI)", "Digg (DIGG)"],
+        datasets: [{
+          label: "Top list cryptocurrencies in dollars",
+          data: responseDataUsd,
+          borderColor: "rgba(245, 229, 27, 1.0)",
+          backgroundColor: "rgba(255, 236, 139, 0.2)",
           borderWidth: 2
         }]
       }
@@ -81,16 +117,26 @@ export default {
         } else {
           this.responseCrypto = xhr.response;
           for (let item in this.responseCrypto) {
-            responseData.value.push(this.responseCrypto[item].RUB);
+            responseDataRub.value.push(this.responseCrypto[item].RUB);
+            responseDataUsd.value.push(this.responseCrypto[item].USD);
           }
-          // console.log(responseData);
+          // console.log(responseDataUsd.value)
         }
       };
 
       xhr.onerror = () => {
         console.log("Something went wrong");
       };
+    },
+    toggleBarLine() {
+      this.isEnabled = !this.isEnabled;
     }
+  },
+  setup() {
+    return {
+      responseDataRub,
+      responseDataUsd
+    };
   },
   mounted() {
     this.getCrypto();
