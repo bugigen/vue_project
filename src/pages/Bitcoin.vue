@@ -1,63 +1,96 @@
 <template>
   <div class="bitcoin">
     <template v-if="responseCrypto">
-      tBTC = {{ responseCrypto.TBTC.USD }} dollars, &nbsp;
-      tBTC = {{ responseCrypto.TBTC.RUB }} rubles <br>
-      Bitcoin = {{ responseCrypto.BTC.USD }} dollars, &nbsp;
-      Bitcoin = {{ responseCrypto.BTC.RUB }} rubles <br>
-      Wrapped Bitcoin = {{ responseCrypto.WBTC.USD }} dollars, &nbsp;
-      Wrapped Bitcoin = {{ responseCrypto.WBTC.RUB }} rubles <br>
-      yearn.finance = {{ responseCrypto.YFI.USD }} dollars, &nbsp;
-      yearn.finance = {{ responseCrypto.YFI.RUB }} rubles <br>
-      Digg = {{ responseCrypto.DIGG.USD }} dollars, &nbsp;
-      Digg = {{ responseCrypto.DIGG.RUB }} rubles <br>
-      {{ responseDataRub }} <br>
-      {{ responseDataUsd }} <br>
-      <button class="btn btn-outline-secondary" @click="toggleBarLine">Line chart</button>
-      <template v-if="isEnabled === true">
-      <bar-chart
-        :type="bar"
-        :data="barData"
-        :options="options"
-        :scales="scales"
-      ></bar-chart>
+      <h3>Top list of cryptocurrencies</h3>
+      <div class="grid">
+        <div class="grid-item header">№</div>
+        <div class="grid-item header">Cryptocurrency</div>
+        <div class="grid-item header">RUB</div>
+        <div class="grid-item header">USD</div>
+        <div class="grid-item header">EUR</div>
+        <div class="grid-item">1</div>
+        <div class="grid-item">tBTC</div>
+        <div class="grid-item">{{ computedTbtcRub }}</div>
+        <div class="grid-item">{{ computedTbtcUsd }}</div>
+        <div class="grid-item">{{ computedTbtcEur }}</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">Bitcoin</div>
+        <div class="grid-item">{{ computedBtcRub }}</div>
+        <div class="grid-item">{{ computedBtcUsd }}</div>
+        <div class="grid-item">{{ computedBtcEur }}</div>
+        <div class="grid-item">3</div>
+        <div class="grid-item">Wrapped Bitcoin</div>
+        <div class="grid-item">{{ computedWbtcRub }}</div>
+        <div class="grid-item">{{ computedWbtcUsd }}</div>
+        <div class="grid-item">{{ computedWbtcEur }}</div>
+        <div class="grid-item">4</div>
+        <div class="grid-item">yearn.finance</div>
+        <div class="grid-item">{{ computedYfiRub }}</div>
+        <div class="grid-item">{{ computedYfiUsd }}</div>
+        <div class="grid-item">{{ computedYfiEur }}</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">Digg</div>
+        <div class="grid-item">{{ computedDiggRub }}</div>
+        <div class="grid-item">{{ computedDiggUsd }}</div>
+        <div class="grid-item">{{ computedDiggEur }}</div>
+      </div>
+      <button class="btn btn-outline-dark me-2" @click="toggleChart">Bar chart</button>
+      <button class="btn btn-outline-primary me-2" @click="toggleChart">Line chart</button>
+      <button class="btn btn-outline-success me-2" @click="toggleChart">Doughnut chart</button>
+      <template v-if="isEnabledBar === true">
+        <the-chart
+          :type="bar"
+          :data="barData"
+          :options="barOptions"
+          :scales="barScales"
+        ></the-chart>
       </template>
-      <template v-else>
-        <bar-chart
+      <template v-else-if="isEnabledLine === true">
+        <the-chart
           :type="line"
           :data="lineData"
-          :options="options"
-          :scales="scales"
-        ></bar-chart>
+          :options="lineOptions"
+          :scales="lineScales"
+        ></the-chart>
+      </template>
+      <template v-else>
+        <the-chart
+          :type="doughnut"
+          :data="doughnutData"
+          :options="doughnutOptions"
+          :style="{width: '500px'}"
+        ></the-chart>
       </template>
     </template>
   </div>
 </template>
 
 <script>
-import BarChart from "@/components/BarChart";
-// import LineChart from "@/components/LineChart";
+import TheChart from "@/components/TheChart";
 import { ref } from "vue";
 
 let responseDataRub = ref([]);
 let responseDataUsd = ref([]);
+let responseDataEur = ref([]);
+let labels = ref(["tBTC (TBTC)", "Bitcoin (BTC)", "Wrapped Bitcoin (WBTC)", "yearn.finance (YFI)", "Digg (DIGG)"]);
 
 export default {
   name: "BitcoinPage",
   components: {
-    BarChart,
-    // LineChart
+    TheChart
   },
   data() {
     return {
       responseCrypto: null,
-      isEnabled: true,
+      isEnabledBar: true,
+      isEnabledLine: false,
+      isEnabledDoughnut: false,
       barName: "Bar Chart",
       bar: "bar",
       barData: {
-        labels: ["tBTC (TBTC)", "Bitcoin (BTC)", "Wrapped Bitcoin (WBTC)", "yearn.finance (YFI)", "Digg (DIGG)"],
+        labels: labels,
         datasets: [{
-          label: "Top list cryptocurrencies in rubles",
+          label: "RUB",
           data: responseDataRub,
           backgroundColor: [
             "rgba(17, 50, 64, 0.4)",
@@ -76,26 +109,135 @@ export default {
           borderWidth: 2
         }]
       },
-      options: {
-        responsive: true
+      barOptions: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: "Cryptocurrencies (RUB)"
+          }
+        }
       },
-      scales: {
+      barScales: {
         y: {
           beginAtZero: true
         }
       },
       line: "line",
       lineData: {
-        labels: ["tBTC (TBTC)", "Bitcoin (BTC)", "Wrapped Bitcoin (WBTC)", "yearn.finance (YFI)", "Digg (DIGG)"],
+        labels: labels,
         datasets: [{
-          label: "Top list cryptocurrencies in dollars",
+          label: "USD",
           data: responseDataUsd,
-          borderColor: "rgba(245, 229, 27, 1.0)",
+          borderColor: "rgb(245,67,27)",
           backgroundColor: "rgba(255, 236, 139, 0.2)",
           borderWidth: 2
         }]
+      },
+      lineOptions: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: "Cryptocurrencies (USD)"
+          }
+        }
+      },
+      lineScales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      doughnut: "doughnut",
+      doughnutData: {
+        labels: labels,
+        datasets: [{
+          label: "EURO",
+          data: responseDataEur,
+          borderColor: [
+            "rgba(17, 50, 64, 1.0)",
+            "rgba(94, 72, 0, 1.0)",
+            "rgba(171, 122, 232, 1.0)",
+            "rgba(27, 25, 169, 1.0)",
+            "rgba(141, 47, 108, 1.0)"
+          ],
+          backgroundColor: [
+            "rgba(17, 50, 64, 0.4)",
+            "rgba(94, 72, 0, 0.4)",
+            "rgba(171, 122, 232, 0.4)",
+            "rgba(27, 25, 169, 0.4)",
+            "rgba(141, 47, 108, 0.4)"
+          ],
+          borderWidth: 2,
+          hoverOffset: 4
+        }]
+      },
+      doughnutOptions: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "top"
+          },
+          title: {
+            display: true,
+            text: "Cryptocurrencies (EUR)"
+          }
+        }
       }
     };
+  },
+  computed: {
+    computedTbtcRub() {
+      return this.responseCrypto.TBTC.RUB.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    },
+    computedTbtcUsd() {
+      return this.responseCrypto.TBTC.USD.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    },
+    computedTbtcEur() {
+      return this.responseCrypto.TBTC.EUR.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    },
+    computedBtcRub() {
+      return this.responseCrypto.BTC.RUB.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    },
+    computedBtcUsd() {
+      return this.responseCrypto.BTC.USD.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    },
+    computedBtcEur() {
+      return this.responseCrypto.BTC.EUR.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    },
+    computedWbtcRub() {
+      return this.responseCrypto.WBTC.RUB.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    },
+    computedWbtcUsd() {
+      return this.responseCrypto.WBTC.USD.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    },
+    computedWbtcEur() {
+      return this.responseCrypto.WBTC.EUR.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    },
+    computedYfiRub() {
+      return this.responseCrypto.YFI.RUB.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    },
+    computedYfiUsd() {
+      return this.responseCrypto.YFI.USD.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    },
+    computedYfiEur() {
+      return this.responseCrypto.YFI.EUR.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    },
+    computedDiggRub() {
+      return this.responseCrypto.DIGG.RUB.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    },
+    computedDiggUsd() {
+      return this.responseCrypto.DIGG.USD.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    },
+    computedDiggEur() {
+      return this.responseCrypto.DIGG.EUR.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    },
   },
   methods: {
     getCrypto() {
@@ -119,8 +261,9 @@ export default {
           for (let item in this.responseCrypto) {
             responseDataRub.value.push(this.responseCrypto[item].RUB);
             responseDataUsd.value.push(this.responseCrypto[item].USD);
+            responseDataEur.value.push(this.responseCrypto[item].EUR);
           }
-          // console.log(responseDataUsd.value)
+          // console.log(this.responseCrypto);
         }
       };
 
@@ -128,14 +271,30 @@ export default {
         console.log("Something went wrong");
       };
     },
-    toggleBarLine() {
-      this.isEnabled = !this.isEnabled;
+    toggleChart(e) {
+      switch (e.target.className) {
+        case "btn btn-outline-dark me-2":
+          this.isEnabledBar = true;
+          this.isEnabledLine = false;
+          this.isEnabledDoughnut = false;
+          break;
+        case "btn btn-outline-primary me-2":
+          this.isEnabledLine = true;
+          this.isEnabledBar = false;
+          this.isEnabledDoughnut = false;
+          break;
+        default:
+          this.isEnabledDoughnut = true;
+          this.isEnabledBar = false;
+          this.isEnabledLine = false;
+      }
     }
   },
   setup() {
     return {
       responseDataRub,
-      responseDataUsd
+      responseDataUsd,
+      responseDataEur
     };
   },
   mounted() {
@@ -148,11 +307,41 @@ export default {
 @import "@/styles/variables.scss";
 
 .bitcoin {
-  //background: url(@/assets/images/Bitcoin.jpg) 50% 50% no-repeat;
-  background: var(--color-bg-light-blue);
+  background: url(@/assets/images/Bitcoin.jpg) 50% 50% no-repeat;
+  //background: var(--color-bg-light-blue);
   @include background();
   //color: var(--color-bg-task);
   font-size: 0.9em;
   overflow: auto;
+
+  h3 {
+    margin-top: 10px;
+  }
+
+  .grid {
+    width: 90%;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: 50px repeat(4, 1fr);
+    border: 1px solid var(--color-font);
+    opacity: 0.9;
+
+    &:hover {
+      opacity: 1.0;
+    }
+
+    .grid-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid var(--color-font);
+      padding: 5px;
+      background: var(--color-tbody);
+    }
+
+    .header {
+      background: var(--color-thead);
+    }
+  }
 }
 </style>

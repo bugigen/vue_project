@@ -8,7 +8,7 @@
 import Chart from "chart.js/auto";
 
 export default {
-  name: "BarChart",
+  name: "TheChart",
   props: {
     type: String,
     data: {},
@@ -34,7 +34,6 @@ export default {
         options: this.options,
         scales: this.scales,
       });
-      // chart;
     }
   },
   async mounted() {
@@ -47,5 +46,12 @@ export default {
 .container {
   margin-top: 20px;
   margin-bottom: 20px;
+  height: 600px;
+  width: 800px;
+}
+
+#chart {
+  height: 100%;
+  width: 100%;
 }
 </style>
