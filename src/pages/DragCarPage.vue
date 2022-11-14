@@ -35,7 +35,7 @@
       @click="showHelp"
       title="Click and look to console"
     >
-      Help
+      Help in console
     </button>
     <button class="btn btn-dark up" @click="toTop">Up</button>
 

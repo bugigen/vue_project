@@ -194,50 +194,50 @@ export default {
   },
   computed: {
     computedTbtcRub() {
-      return this.responseCrypto.TBTC.RUB.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+      return this.responseCrypto.TBTC.RUB.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
     },
     computedTbtcUsd() {
-      return this.responseCrypto.TBTC.USD.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+      return this.responseCrypto.TBTC.USD.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
     },
     computedTbtcEur() {
-      return this.responseCrypto.TBTC.EUR.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+      return this.responseCrypto.TBTC.EUR.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
     },
     computedBtcRub() {
-      return this.responseCrypto.BTC.RUB.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+      return this.responseCrypto.BTC.RUB.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
     },
     computedBtcUsd() {
-      return this.responseCrypto.BTC.USD.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+      return this.responseCrypto.BTC.USD.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
     },
     computedBtcEur() {
-      return this.responseCrypto.BTC.EUR.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+      return this.responseCrypto.BTC.EUR.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
     },
     computedWbtcRub() {
-      return this.responseCrypto.WBTC.RUB.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+      return this.responseCrypto.WBTC.RUB.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
     },
     computedWbtcUsd() {
-      return this.responseCrypto.WBTC.USD.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+      return this.responseCrypto.WBTC.USD.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
     },
     computedWbtcEur() {
-      return this.responseCrypto.WBTC.EUR.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+      return this.responseCrypto.WBTC.EUR.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
     },
     computedYfiRub() {
-      return this.responseCrypto.YFI.RUB.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+      return this.responseCrypto.YFI.RUB.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
     },
     computedYfiUsd() {
-      return this.responseCrypto.YFI.USD.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+      return this.responseCrypto.YFI.USD.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
     },
     computedYfiEur() {
-      return this.responseCrypto.YFI.EUR.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+      return this.responseCrypto.YFI.EUR.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
     },
     computedDiggRub() {
-      return this.responseCrypto.DIGG.RUB.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+      return this.responseCrypto.DIGG.RUB.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
     },
     computedDiggUsd() {
-      return this.responseCrypto.DIGG.USD.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+      return this.responseCrypto.DIGG.USD.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
     },
     computedDiggEur() {
-      return this.responseCrypto.DIGG.EUR.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
-    },
+      return this.responseCrypto.DIGG.EUR.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1 ");
+    }
   },
   methods: {
     getCrypto() {
@@ -258,12 +258,12 @@ export default {
           console.log(`Error ${xhr.status}: ${xhr.statusText}`);
         } else {
           this.responseCrypto = xhr.response;
+          console.log(this.responseCrypto);
           for (let item in this.responseCrypto) {
             responseDataRub.value.push(this.responseCrypto[item].RUB);
             responseDataUsd.value.push(this.responseCrypto[item].USD);
             responseDataEur.value.push(this.responseCrypto[item].EUR);
           }
-          // console.log(this.responseCrypto);
         }
       };
 
@@ -288,6 +288,9 @@ export default {
           this.isEnabledBar = false;
           this.isEnabledLine = false;
       }
+      document.querySelector(".btn").scrollIntoView({
+        behavior: "smooth"
+      });
     }
   },
   setup() {
@@ -307,15 +310,15 @@ export default {
 @import "@/styles/variables.scss";
 
 .bitcoin {
-  background: url(@/assets/images/Bitcoin.jpg) 50% 50% no-repeat;
-  //background: var(--color-bg-light-blue);
+  position: relative;
+  //background: url(@/assets/images/Bitcoin.jpg) 50% 50% no-repeat;
+  background: var(--color-bg-light-blue);
   @include background();
-  //color: var(--color-bg-task);
   font-size: 0.9em;
   overflow: auto;
 
   h3 {
-    margin-top: 10px;
+    margin: 10px auto;
   }
 
   .grid {
@@ -324,11 +327,6 @@ export default {
     display: grid;
     grid-template-columns: 50px repeat(4, 1fr);
     border: 1px solid var(--color-font);
-    opacity: 0.9;
-
-    &:hover {
-      opacity: 1.0;
-    }
 
     .grid-item {
       display: flex;

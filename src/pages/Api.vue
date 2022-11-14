@@ -14,8 +14,14 @@
         id="searchProfession"
         placeholder="in Udmurt Republic"
         v-model="searchProfession"
+        @keyup.enter = "getJobs(urlProfession)"
       > &nbsp;
-      <button class="btn btn-outline-primary" @click="getJobs(urlProfession)">Find</button>
+      <button
+        class="btn btn-outline-primary"
+        @click="getJobs(urlProfession)"
+      >
+        Find
+      </button>
 
       <label for="searchProfessionRussia" class="form-label me-2"> </label>
       <input
@@ -24,6 +30,7 @@
         id="searchProfessionRussia"
         placeholder="in Russia"
         v-model="searchProfessionRussia"
+        @keyup.enter = "getJobs(urlProfessionRussia)"
       > &nbsp;
       <button class="btn btn-outline-primary" @click="getJobs(urlProfessionRussia)">Find</button>
     </div>
@@ -137,7 +144,10 @@ export default {
           }
           this.jobs = data.results.vacancies;
           this.url = response.url;
-          this.totalPages = Math.ceil(data.meta.total / this.limit);
+          // this.totalPages = Math.ceil(data.meta.total / this.limit);
+          Math.floor(data.meta.total / this.limit) < 100
+            ? this.totalPages = Math.floor(data.meta.total / this.limit)
+            : this.totalPages = 100;
         })
         .catch(error => {
           this.errorMessage = error;
