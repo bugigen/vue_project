@@ -147,7 +147,7 @@ export default {
           // this.totalPages = Math.ceil(data.meta.total / this.limit);
           Math.floor(data.meta.total / this.limit) < 100
             ? this.totalPages = Math.floor(data.meta.total / this.limit)
-            : this.totalPages = 100;
+            : this.totalPages = 99;
         })
         .catch(error => {
           this.errorMessage = error;

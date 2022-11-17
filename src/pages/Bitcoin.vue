@@ -258,7 +258,6 @@ export default {
           console.log(`Error ${xhr.status}: ${xhr.statusText}`);
         } else {
           this.responseCrypto = xhr.response;
-          console.log(this.responseCrypto);
           for (let item in this.responseCrypto) {
             responseDataRub.value.push(this.responseCrypto[item].RUB);
             responseDataUsd.value.push(this.responseCrypto[item].USD);

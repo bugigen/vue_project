@@ -104,8 +104,6 @@
           class="draggable"
         >
         </draggable>
-
-        <!--        <tank-item v-for="accessory in allAccessories.Engines" :key="accessory.id" :item="accessory.name"></tank-item>-->
       </tank-list>
     </div>
 
@@ -294,5 +292,20 @@ export default defineComponent({
 
 .modal-body {
   font-size: 0.8em;
+}
+
+@media (max-width: 768px) {
+  .task {
+    font-size: 2.8vw;
+  }
+
+  .chooseTank {
+    flex-direction: column;
+    align-items: center;
+
+    option {
+      font-size: 0.7em;
+    }
+  }
 }
 </style>
