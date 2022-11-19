@@ -1,7 +1,7 @@
 <template>
   <main class="main">
     <section class="section type">
-      <img src="@/assets/images/Tank.jpg" alt="Tank">
+      <img src="@/assets/images/Client_server.png" alt="Tank">
       <p class="typing">
         Получение данных с сервера.
       </p>
@@ -121,7 +121,8 @@ export default {
   background: url(@/assets/images/Tank_images/Tank_IS-3_photo.png) 50% 50% no-repeat;
   @include background();
   color: var(--color-bg-task);
-  overflow: auto;
+  overflow-y: auto;
+  //overflow-x: hidden;
   font-size: 0.9em;
 
   .section {
@@ -162,6 +163,7 @@ export default {
     overflow: hidden;
     border-right: 3px solid;
     font-size: 2.2em;
+    margin-top: 280px;
   }
 
   @keyframes typing {
@@ -177,9 +179,21 @@ export default {
   }
 }
 
+@media (max-width: 992px) {
+  .main {
+    font-size: 0.8em;
+  }
+}
+
 @media (max-width: 768px) {
   .section {
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .main {
+    font-size: 0.7em;
+    height: calc(100vh - 130px);
   }
 }
 </style>

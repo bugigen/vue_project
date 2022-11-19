@@ -1,38 +1,47 @@
 <template>
   <div class="api">
-    <div class="category">
-      Get vacancies in Russia &nbsp;
-      <button class="btn btn-success" @click="getJobs(urlRussia)">Get</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      Get vacancies in Udmurt Rebublic &nbsp;
-      <button class="btn btn-success" @click="getJobs(urlUdmurtia)">Get</button>
+    <div class="category getJob">
+      <div>
+        Get vacancies in Russia &nbsp;
+        <button class="btn btn-success" @click="getJobs(urlRussia)">Get</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      <div>
+        Get vacancies in Udmurt Rebublic &nbsp;
+        <button class="btn btn-success" @click="getJobs(urlUdmurtia)">Get</button>
+      </div>
     </div>
-    <div class="category">
-      <label for="searchProfession" class="form-label me-2">Search profession </label> <br>
-      <input
-        type="text"
-        class="form-control w-25 d-inline"
-        id="searchProfession"
-        placeholder="in Udmurt Republic"
-        v-model="searchProfession"
-        @keyup.enter = "getJobs(urlProfession)"
-      > &nbsp;
-      <button
-        class="btn btn-outline-primary"
-        @click="getJobs(urlProfession)"
-      >
-        Find
-      </button>
 
-      <label for="searchProfessionRussia" class="form-label me-2"> </label>
-      <input
-        type="text"
-        class="form-control w-25 d-inline"
-        id="searchProfessionRussia"
-        placeholder="in Russia"
-        v-model="searchProfessionRussia"
-        @keyup.enter = "getJobs(urlProfessionRussia)"
-      > &nbsp;
-      <button class="btn btn-outline-primary" @click="getJobs(urlProfessionRussia)">Find</button>
+    <p>Search profession </p>
+
+    <div class="category findJob">
+      <div>
+        <input
+          type="text"
+          class="form-control w-75 d-inline"
+          id="searchProfession"
+          placeholder="in Udmurt Republic"
+          v-model="searchProfession"
+          @keyup.enter="getJobs(urlProfession)"
+        > &nbsp;
+        <button
+          class="btn btn-outline-primary"
+          @click="getJobs(urlProfession)"
+        >
+          Find
+        </button>
+      </div>
+
+      <div>
+        <input
+          type="text"
+          class="form-control w-75 d-inline"
+          id="searchProfessionRussia"
+          placeholder="in Russia"
+          v-model="searchProfessionRussia"
+          @keyup.enter="getJobs(urlProfessionRussia)"
+        > &nbsp;
+        <button class="btn btn-outline-primary" @click="getJobs(urlProfessionRussia)">Find</button>
+      </div>
     </div>
 
     <table class="table table-info table-hover table-bordered border-success align-middle">
@@ -93,7 +102,7 @@
         class="pagination-page bigger-width"
         @click="changePage(totalPages)"
       >
-        ... {{totalPages}}
+        ... {{ totalPages }}
       </div>
     </div>
   </div>
@@ -111,7 +120,7 @@ export default {
       searchProfessionRussia: null,
       offset: 1,
       limit: 100,
-      totalPages: 0,
+      totalPages: 0
     };
   },
   computed: {
@@ -141,6 +150,10 @@ export default {
           if (!response.ok) {
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
+          }
+
+          if (Object.entries(data.results).length === 0) {
+            alert('No such vacancy');
           }
           this.jobs = data.results.vacancies;
           this.url = response.url;
@@ -185,11 +198,20 @@ export default {
 
   .category {
     margin: 10px 0 20px 10px;
-    text-align: left;
+    text-align: initial;
+    display: flex;
+    justify-content: left;
   }
 
-  #searchProfessionRussia {
-    margin-left: 50px;
+  .findJob {
+    div {
+      flex-basis: 45%;
+    }
+  }
+
+  p {
+    text-align: left;
+    margin-left: 10px;
   }
 }
 
@@ -248,6 +270,27 @@ export default {
 
   .bigger-width {
     min-width: 80px;
+  }
+}
+
+@media (max-width: 992px) {
+  .api {
+    .category {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .findJob {
+      .w-75 {
+        width: 50% !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .api {
+    height: calc(100vh - 130px);
   }
 }
 

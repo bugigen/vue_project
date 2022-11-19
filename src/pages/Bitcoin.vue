@@ -310,7 +310,6 @@ export default {
 
 .bitcoin {
   position: relative;
-  //background: url(@/assets/images/Bitcoin.jpg) 50% 50% no-repeat;
   background: var(--color-bg-light-blue);
   @include background();
   font-size: 0.9em;
@@ -339,6 +338,16 @@ export default {
     .header {
       background: var(--color-thead);
     }
+  }
+}
+
+@media (max-width: 992px) {
+
+}
+
+@media (max-width: 768px) {
+  .bitcoin {
+    height: calc(100vh - 130px);
   }
 }
 </style>

@@ -294,17 +294,31 @@ export default defineComponent({
   font-size: 0.8em;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .task {
     font-size: 2.8vw;
   }
+}
 
-  .chooseTank {
-    flex-direction: column;
-    align-items: center;
+@media (max-width: 768px) {
+  .drag {
+    height: calc(100vh - 130px);
 
-    option {
-      font-size: 0.7em;
+    .task {
+      font-size: 2.7vw;
+    }
+
+    .chooseTank {
+      flex-direction: column;
+      align-items: center;
+
+      option {
+        font-size: 0.7em;
+      }
+    }
+
+    .wrapper {
+      font-size: 0.8em;
     }
   }
 }

@@ -35,7 +35,7 @@
       @click="showHelp"
       title="Click and look to console"
     >
-      Help in console
+      Help in <br> console
     </button>
     <button class="btn btn-dark up" @click="toTop">Up</button>
 
@@ -101,7 +101,7 @@ export default {
       document.querySelector("#top").scrollIntoView({
         behavior: "smooth"
       });
-    },
+    }
   },
   setup() {
     onMounted(() => {
@@ -165,66 +165,118 @@ export default {
   background: url(@/assets/images/Car.jpg) 50% 50% no-repeat;
   @include task();
   @include background();
-}
 
-.column {
-  display: flex;
-  justify-content: space-between;
-  flex-basis: 55%;
-  background: var(--color-bg-yellow);
-  padding: 20px;
-  border-radius: 10px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  opacity: 0.88;
-  transition: all 0.5s ease-out;
+  .column {
+    display: flex;
+    justify-content: space-between;
+    flex-basis: 60%;
+    background: var(--color-bg-yellow);
+    padding: 20px;
+    border-radius: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    opacity: 0.88;
+    transition: all 0.5s ease-out;
 
-  &:hover {
-    opacity: 0.96;
-    transition: all 0.5s ease-in;
+    &:hover {
+      opacity: 0.96;
+      transition: all 0.5s ease-in;
+    }
+
+    .column-item {
+      background: var(--color-bg-medium-blue);
+      padding: 10px;
+      border-radius: 5px;
+      min-height: 3200px;
+      flex-basis: 40%;
+
+      h2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 30px;
+        min-height: 80px;
+      }
+
+      .item {
+        background: var(--color-bg-medium-green);
+        margin: 20px;
+        padding: 10px;
+        border-radius: 3px;
+        text-align: center;
+        color: var(--color-light-black);
+      }
+    }
   }
 }
 
-.column-item {
-  background: var(--color-bg-medium-blue);
-  padding: 10px;
-  border-radius: 5px;
-  min-height: 3200px;
-  flex-basis: 40%;
-}
-
-.column-item h2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
-  min-height: 80px;
-}
-
-.item {
-  background: var(--color-bg-medium-green);
-  margin: 20px;
-  padding: 10px;
-  border-radius: 3px;
-  text-align: center;
-  color: var(--color-light-black);
+.check,
+.help,
+.up {
+  position: absolute;
+  right: 3%;
 }
 
 .check {
-  position: absolute;
   top: 8%;
-  right: 6%;
 }
 
 .help {
-  position: absolute;
   top: 18%;
-  right: 6%;
 }
 
 .up {
-  position: absolute;
   bottom: 8%;
-  right: 6%;
+}
+
+
+@media (max-width: 992px) {
+  .drag {
+    font-size: 0.9em;
+  }
+
+  .task {
+    font-size: 2.7vw;
+  }
+
+  .column {
+    font-size: 0.8em;
+
+    .column-item {
+      h2 {
+        font-size: 3vw;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .drag {
+    height: calc(100vh - 130px);
+
+    .task {
+      font-size: 2.8vw;
+    }
+
+    .help,
+    .up,
+    .check {
+      right: 2%;
+      width: 15%;
+      font-size: 2.5vw;
+    }
+
+    .column {
+      font-size: 2.5vw;
+
+      .column-item {
+
+        .item {
+          margin: 5px;
+          font-size: 2.5vw;
+        }
+      }
+    }
+  }
 }
 </style>
