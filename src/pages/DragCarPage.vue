@@ -140,7 +140,6 @@ export default {
         if (x.id === itemID) {
           x.categoryId = categoryId;
         }
-        // console.log(x.isCorrect)
         return x;
       });
     }

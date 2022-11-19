@@ -163,7 +163,6 @@ export default {
     overflow: hidden;
     border-right: 3px solid;
     font-size: 2.2em;
-    margin-top: 280px;
   }
 
   @keyframes typing {
