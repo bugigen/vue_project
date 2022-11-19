@@ -45,10 +45,10 @@
     </div>
 
     <table class="table table-info table-hover table-bordered border-success align-middle">
-      <template v-if="this.url && this.url.includes('http://opendata.trudvsem.ru/api/v1/vacancies/region/18?')">
+      <template v-if="this.url && this.url.includes('https://opendata.trudvsem.ru/api/v1/vacancies/region/18?')">
         <caption>Udmurt Rebublic</caption>
       </template>
-      <template v-else-if="this.url && this.url.includes('http://opendata.trudvsem.ru/api/v1/vacancies?')">
+      <template v-else-if="this.url && this.url.includes('https://opendata.trudvsem.ru/api/v1/vacancies?')">
         <caption>Russia</caption>
       </template>
       <template v-else>
@@ -125,19 +125,19 @@ export default {
   },
   computed: {
     urlRussia() {
-      return "http://opendata.trudvsem.ru/api/v1/vacancies" + "?offset=" + this.offset +
+      return "https://opendata.trudvsem.ru/api/v1/vacancies" + "?offset=" + this.offset +
         "&limit=" + this.limit;
     },
     urlUdmurtia() {
-      return "http://opendata.trudvsem.ru/api/v1/vacancies/region/18" + "?offset=" + this.offset +
+      return "https://opendata.trudvsem.ru/api/v1/vacancies/region/18" + "?offset=" + this.offset +
         "&limit=" + this.limit;
     },
     urlProfession() {
-      return "http://opendata.trudvsem.ru/api/v1/vacancies/region/18?text=" +
+      return "https://opendata.trudvsem.ru/api/v1/vacancies/region/18?text=" +
         encodeURIComponent(this.searchProfession) + "&offset=" + this.offset + "&limit=" + this.limit;
     },
     urlProfessionRussia() {
-      return "http://opendata.trudvsem.ru/api/v1/vacancies?text=" +
+      return "https://opendata.trudvsem.ru/api/v1/vacancies?text=" +
         encodeURIComponent(this.searchProfessionRussia) + "&offset=" + this.offset + "&limit=" + this.limit;
     }
   },
@@ -169,15 +169,15 @@ export default {
     },
     changePage(pageNumber) {
       this.offset = pageNumber;
-      if (this.url.includes("http://opendata.trudvsem.ru/api/v1/vacancies?") &&
-        this.url.includes("http://opendata.trudvsem.ru/api/v1/vacancies?text=") === false) {
+      if (this.url.includes("https://opendata.trudvsem.ru/api/v1/vacancies?") &&
+        this.url.includes("https://opendata.trudvsem.ru/api/v1/vacancies?text=") === false) {
         this.getJobs(this.urlRussia);
-      } else if (this.url.includes("http://opendata.trudvsem.ru/api/v1/vacancies/region/18?") &&
-        this.url.includes("http://opendata.trudvsem.ru/api/v1/vacancies/region/18?text=") === false) {
+      } else if (this.url.includes("https://opendata.trudvsem.ru/api/v1/vacancies/region/18?") &&
+        this.url.includes("https://opendata.trudvsem.ru/api/v1/vacancies/region/18?text=") === false) {
         this.getJobs(this.urlUdmurtia);
-      } else if (this.url.includes("http://opendata.trudvsem.ru/api/v1/vacancies/region/18?text=")) {
+      } else if (this.url.includes("https://opendata.trudvsem.ru/api/v1/vacancies/region/18?text=")) {
         this.getJobs(this.urlProfession);
-      } else if (this.url.includes("http://opendata.trudvsem.ru/api/v1/vacancies?text=")) {
+      } else if (this.url.includes("https://opendata.trudvsem.ru/api/v1/vacancies?text=")) {
         this.getJobs(this.urlProfessionRussia);
       }
     }
