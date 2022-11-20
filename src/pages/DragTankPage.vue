@@ -24,7 +24,8 @@
         </template>
       </div>
 
-      <button class="btn btn-success" @click="verifyTank">Verify</button>
+      <button class="btn btn-success" @click="verifyTank" data-bs-toggle="modal" data-bs-target="#modalTank">Verify
+      </button>
       <button class="btn btn-info help" data-bs-toggle="modal" data-bs-target="#exampleModal">Help
       </button>
 
@@ -50,6 +51,46 @@
               <div v-for="state in this.$store.state.accessoriesSU_101" :key="state">
                 {{ state }}
               </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="modalTank" tabindex="-1">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="modalLabel">О танке</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <template v-if="this.tankSelect === ''">
+                Выбери танк
+              </template>
+              <template v-else-if="tankSelect !== '' && modalShowKV_4 === true">
+                <u> {{ this.tankSelect }} </u> <br>
+                <template v-for="item in this.allAccessories.Guns" :key="item">
+                  <template v-if="item.tank_name === 'КВ-4'">
+                    {{ item.id_name }} - {{ item.name }} : <br>
+                    Пробитие - {{ item.penetration }} мм <br>
+                    Урон - {{item.damage}} hp <br>
+                    Цена - {{item.price}} серебра <br>
+                    <hr>
+                  </template>
+                </template>
+              </template>
+              <template v-else-if="tankSelect !== '' && modalShowIS_3 === true">
+                {{ this.tankSelect }}
+              </template>
+              <template v-else-if="tankSelect !== '' && modalShowSU_101 === true">
+                {{ this.tankSelect }}
+              </template>
+              <template v-else>
+                Неправильно!
+              </template>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -131,7 +172,10 @@ export default defineComponent({
       dragging: false,
       allAccessories: [],
       url: "https://run.mocky.io/v3/41b0fa69-3295-4540-a844-6890d7cb1e01",
-      tankSelect: ""
+      tankSelect: "",
+      modalShowKV_4: false,
+      modalShowIS_3: false,
+      modalShowSU_101: false
     };
   },
   components: {
@@ -146,6 +190,7 @@ export default defineComponent({
         this.shuffle(this.allAccessories.Guns);
         this.shuffle(this.allAccessories.Engines);
         this.shuffle(this.allAccessories.Suspensions);
+        // console.log(this.allAccessories);
       });
   },
   methods: {
@@ -175,14 +220,32 @@ export default defineComponent({
       });
 
       if (includeKV_4 > 0 && this.tankSelect === "КВ-4" && includeIS_3 === 0 && includeSU_101 === 0) {
+        this.modalShowKV_4 = true;
+        this.modalShowIS_3 = false;
+        this.modalShowSU_101 = false;
+        console.log("KV-4", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
         alert("Correct");
+        // return [this.modalShowKV_4 = true, this.modalShowIS_3 = false, this.modalShowSU_101 = false];
       } else if (includeIS_3 > 0 && this.tankSelect === "ИС-3" && includeKV_4 === 0 && includeSU_101 === 0) {
+        this.modalShowIS_3 = true;
+        this.modalShowKV_4 = false;
+        this.modalShowSU_101 = false;
+        console.log("IS-3", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
         alert("Correct");
       } else if (includeSU_101 > 0 && this.tankSelect === "СУ-101" && includeKV_4 === 0 && includeIS_3 === 0) {
+        this.modalShowSU_101 = true;
+        this.modalShowKV_4 = false;
+        this.modalShowIS_3 = false;
+        console.log("SU-101", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
         alert("Correct");
       } else if (this.tankSelect === "") {
+        console.log("empty", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
         alert("Choose tank");
       } else {
+        this.modalShowSU_101 = false;
+        this.modalShowKV_4 = false;
+        this.modalShowIS_3 = false;
+        console.log("wrong", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
         alert("Wrong!");
       }
     },
