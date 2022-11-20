@@ -1,6 +1,6 @@
-# vue_project
+# Информационный сайт по танкам из игры World of Tanks с нахождением запчастей для конкретного танка
 
-## Project setup
+### Project setup
 ```
 npm install
 ```
