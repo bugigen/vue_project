@@ -122,7 +122,6 @@ export default {
   @include background();
   color: var(--color-bg-task);
   overflow-y: auto;
-  //overflow-x: hidden;
   font-size: 0.9em;
 
   .section {

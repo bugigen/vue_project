@@ -70,23 +70,74 @@
               <template v-if="this.tankSelect === ''">
                 Выбери танк
               </template>
+
               <template v-else-if="tankSelect !== '' && modalShowKV_4 === true">
                 <u> {{ this.tankSelect }} </u> <br>
-                <template v-for="item in this.allAccessories.Guns" :key="item">
-                  <template v-if="item.tank_name === 'КВ-4'">
-                    {{ item.id_name }} - {{ item.name }} : <br>
-                    Пробитие - {{ item.penetration }} мм <br>
-                    Урон - {{item.damage}} hp <br>
-                    Цена - {{item.price}} серебра <br>
-                    <hr>
+                <template v-if="this.items.length === this.$store.state.accessoriesKV_4.length">
+                  <template v-for="item in this.allAccessories.Guns" :key="item.id">
+                    <template v-if="item.tank_name === 'КВ-4'">
+                      {{ item.id_name }} - {{ item.name }} : <br>
+                      Пробитие - {{ item.penetration }} мм <br>
+                      Урон - {{ item.damage }} ед. <br>
+                      Цена - {{ item.price }} кредитов <br>
+                      <hr>
+                    </template>
+                  </template>
+                  <template v-for="item in this.allAccessories.Engines" :key="item.id">
+                    <template v-if="item.tank_name === 'КВ-4'">
+                      {{ item.id_name }} - {{ item.name }} : <br>
+                      Мощность - {{ item.power }} л.с. <br>
+                      Цена - {{ item.price }} кредитов <br>
+                      <hr>
+                    </template>
                   </template>
                 </template>
               </template>
+
               <template v-else-if="tankSelect !== '' && modalShowIS_3 === true">
-                {{ this.tankSelect }}
+                <u> {{ this.tankSelect }} </u> <br>
+                <template v-if="this.items.length === this.$store.state.accessoriesIS_3.length">
+                  <template v-for="item in this.allAccessories.Guns" :key="item.id">
+                    <template v-if="item.tank_name === 'ИС-3'">
+                      {{ item.id_name }} - {{ item.name }} : <br>
+                      Пробитие - {{ item.penetration }} мм <br>
+                      Урон - {{ item.damage }} ед. <br>
+                      Цена - {{ item.price }} кредитов <br>
+                      <hr>
+                    </template>
+                  </template>
+                  <template v-for="item in this.allAccessories.Engines" :key="item.id">
+                    <template v-if="item.tank_name === 'ИС-3'">
+                      {{ item.id_name }} - {{ item.name }} : <br>
+                      Мощность - {{ item.power }} л.с. <br>
+                      Цена - {{ item.price }} кредитов <br>
+                      <hr>
+                    </template>
+                  </template>
+                </template>
+
               </template>
               <template v-else-if="tankSelect !== '' && modalShowSU_101 === true">
-                {{ this.tankSelect }}
+                <u> {{ this.tankSelect }} </u> <br>
+                <template v-if="this.items.length === this.$store.state.accessoriesSU_101.length">
+                  <template v-for="item in this.allAccessories.Guns" :key="item.id">
+                    <template v-if="item.tank_name === 'СУ-101'">
+                      {{ item.id_name }} - {{ item.name }} : <br>
+                      Пробитие - {{ item.penetration }} мм <br>
+                      Урон - {{ item.damage }} ед. <br>
+                      Цена - {{ item.price }} кредитов <br>
+                      <hr>
+                    </template>
+                  </template>
+                  <template v-for="item in this.allAccessories.Engines" :key="item.id">
+                    <template v-if="item.tank_name === 'СУ-101'">
+                      {{ item.id_name }} - {{ item.name }} : <br>
+                      Мощность - {{ item.power }} л.с. <br>
+                      Цена - {{ item.price }} кредитов <br>
+                      <hr>
+                    </template>
+                  </template>
+                </template>
               </template>
               <template v-else>
                 Неправильно!
@@ -175,7 +226,8 @@ export default defineComponent({
       tankSelect: "",
       modalShowKV_4: false,
       modalShowIS_3: false,
-      modalShowSU_101: false
+      modalShowSU_101: false,
+      items: []
     };
   },
   components: {
@@ -205,9 +257,10 @@ export default defineComponent({
       let includeKV_4 = 0;
       let includeIS_3 = 0;
       let includeSU_101 = 0;
-      let items = document.querySelectorAll("#suitableAccessories .item");
+      this.items = document.querySelectorAll("#suitableAccessories .item");
+      // console.log(this.$store.state.accessoriesKV_4.length)
 
-      items.forEach((item) => {
+      this.items.forEach((item) => {
         if (this.$store.state.accessoriesKV_4.includes(item.textContent.trim())) {
           includeKV_4 += 1;
         }
@@ -225,7 +278,6 @@ export default defineComponent({
         this.modalShowSU_101 = false;
         console.log("KV-4", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
         alert("Correct");
-        // return [this.modalShowKV_4 = true, this.modalShowIS_3 = false, this.modalShowSU_101 = false];
       } else if (includeIS_3 > 0 && this.tankSelect === "ИС-3" && includeKV_4 === 0 && includeSU_101 === 0) {
         this.modalShowIS_3 = true;
         this.modalShowKV_4 = false;
