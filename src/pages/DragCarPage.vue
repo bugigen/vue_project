@@ -1,10 +1,10 @@
 <template>
   <div class="drag">
     <div class="task">
-      <div>Choose</div>
-      <div>all</div>
-      <div>accessories</div>
-      <div>of</div>
+      <div>Выбери</div>
+      <div>все</div>
+      <div>аксессуары</div>
+      <div>для</div>
       <div>Shelby</div>
       <div>Cobra</div>
     </div>
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-success check" @click="checkCar(); showModal()">Check</button>
+    <button class="btn btn-success check" @click="checkCar(); showModal()">Проверить</button>
     <button
       class="btn btn-info help"
       @click="showHelp"
@@ -221,7 +221,7 @@ export default {
 }
 
 .help {
-  top: 18%;
+  top: 20%;
 }
 
 .up {
@@ -263,6 +263,10 @@ export default {
       right: 2%;
       width: 15%;
       font-size: 2.5vw;
+    }
+
+    .check {
+      padding-left: 7px;
     }
 
     .column {

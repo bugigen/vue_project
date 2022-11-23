@@ -2,16 +2,16 @@
   <div class="api">
     <div class="category getJob">
       <div>
-        Get vacancies in Russia &nbsp;
+        Получить вакансии в России &nbsp;
         <button class="btn btn-success" @click="getJobs(urlRussia)">Get</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
       <div>
-        Get vacancies in Udmurt Rebublic &nbsp;
+        Получить вакансии в Удмуртии &nbsp;
         <button class="btn btn-success" @click="getJobs(urlUdmurtia)">Get</button>
       </div>
     </div>
 
-    <p>Search profession </p>
+    <p>Поиск профессии</p>
 
     <div class="category findJob">
       <div>
@@ -19,7 +19,7 @@
           type="text"
           class="form-control w-75 d-inline"
           id="searchProfession"
-          placeholder="in Udmurt Republic"
+          placeholder="в Удмуртии"
           v-model="searchProfession"
           @keyup.enter="getJobs(urlProfession)"
         > &nbsp;
@@ -36,7 +36,7 @@
           type="text"
           class="form-control w-75 d-inline"
           id="searchProfessionRussia"
-          placeholder="in Russia"
+          placeholder="в России"
           v-model="searchProfessionRussia"
           @keyup.enter="getJobs(urlProfessionRussia)"
         > &nbsp;
@@ -46,10 +46,10 @@
 
     <table class="table table-info table-hover table-bordered border-success align-middle">
       <template v-if="this.url && this.url.includes('https://opendata.trudvsem.ru/api/v1/vacancies/region/18?')">
-        <caption>Udmurt Rebublic</caption>
+        <caption>Удмуртия</caption>
       </template>
       <template v-else-if="this.url && this.url.includes('https://opendata.trudvsem.ru/api/v1/vacancies?')">
-        <caption>Russia</caption>
+        <caption>Россия</caption>
       </template>
       <template v-else>
         <caption>&nbsp;</caption>

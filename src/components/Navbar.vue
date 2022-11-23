@@ -1,22 +1,20 @@
 <template>
   <ul class="nav justify-content-center">
     <li class="nav-item">
-      <a class="nav-link active" @click="$router.push('/')">Main Page</a>
+      <a class="nav-link active" @click="$router.push('/')">Главная</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" @click="$router.push('/drag-tank')">Танки</a>
     </li>
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button">
-        Drag And Drop
+        Другие проекты
       </a>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" @click="$router.push('/drag-tank')">Tank</a></li>
-        <li><a class="dropdown-item" @click="$router.push('/drag-car')">Car</a></li>
+        <li><a class="dropdown-item" @click="$router.push('/drag-car')">Авто</a></li>
+        <li><a class="dropdown-item" @click="$router.push('/api')">Работа</a></li>
+        <li><a class="dropdown-item" @click="$router.push('/bitcoin')">Биткоин</a></li>
       </ul>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" @click="$router.push('/api')">Job</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" @click="$router.push('/bitcoin')">Bitcoin</a>
     </li>
   </ul>
 </template>

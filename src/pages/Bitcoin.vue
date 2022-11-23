@@ -1,7 +1,7 @@
 <template>
   <div class="bitcoin">
     <template v-if="responseCrypto">
-      <h3>Top list of cryptocurrencies</h3>
+      <h3>Топ лист криптовалют</h3>
       <div class="grid">
         <div class="grid-item header">№</div>
         <div class="grid-item header">Cryptocurrency</div>

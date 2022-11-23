@@ -1,9 +1,9 @@
 <template>
   <div class="drag">
     <div class="chooseTank">
-      <span id="top">Tank</span>
+      <span id="top">Танк</span>
       <select v-model="tankSelect">
-        <option value="" selected disabled>Choose Tank</option>
+        <option value="" selected disabled>Выбери танк</option>
         <option value="КВ-4">КВ-4</option>
         <option value="ИС-3">ИС-3</option>
         <option value="СУ-101">СУ-101</option>
@@ -24,7 +24,7 @@
         </template>
       </div>
 
-      <button class="btn btn-success" @click="verifyTank" data-bs-toggle="modal" data-bs-target="#modalTank">Verify
+      <button class="btn btn-success" @click="verifyTank" data-bs-toggle="modal" data-bs-target="#modalTank">Проверить
       </button>
       <button class="btn btn-info help" data-bs-toggle="modal" data-bs-target="#exampleModal">Help
       </button>
@@ -33,7 +33,7 @@
         <div class="modal-dialog modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Accessories for tanks</h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Аксессуары для танков</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -152,11 +152,11 @@
     </div>
 
     <div class="task">
-      <div>Choose</div>
-      <div>accessories</div>
-      <div>of the</div>
-      <div>selected</div>
-      <div>tank</div>
+      <div>Выбери</div>
+      <div>аксессуары</div>
+      <div>для</div>
+      <div>выбранного</div>
+      <div>танка</div>
     </div>
 
     <div class="wrapper">
@@ -276,28 +276,28 @@ export default defineComponent({
         this.modalShowKV_4 = true;
         this.modalShowIS_3 = false;
         this.modalShowSU_101 = false;
-        console.log("KV-4", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
+        // console.log("KV-4", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
         alert("Correct");
       } else if (includeIS_3 > 0 && this.tankSelect === "ИС-3" && includeKV_4 === 0 && includeSU_101 === 0) {
         this.modalShowIS_3 = true;
         this.modalShowKV_4 = false;
         this.modalShowSU_101 = false;
-        console.log("IS-3", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
+        // console.log("IS-3", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
         alert("Correct");
       } else if (includeSU_101 > 0 && this.tankSelect === "СУ-101" && includeKV_4 === 0 && includeIS_3 === 0) {
         this.modalShowSU_101 = true;
         this.modalShowKV_4 = false;
         this.modalShowIS_3 = false;
-        console.log("SU-101", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
+        // console.log("SU-101", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
         alert("Correct");
       } else if (this.tankSelect === "") {
-        console.log("empty", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
+        // console.log("empty", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
         alert("Choose tank");
       } else {
         this.modalShowSU_101 = false;
         this.modalShowKV_4 = false;
         this.modalShowIS_3 = false;
-        console.log("wrong", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
+        // console.log("wrong", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
         alert("Wrong!");
       }
     },
