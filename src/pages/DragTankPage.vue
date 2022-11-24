@@ -160,7 +160,7 @@
     </div>
 
     <div class="wrapper">
-      <tank-list title="All accessories" id="allAccessories">
+      <tank-list title="Все аксессуары" id="allAccessories">
         <draggable
           group="tanks"
           ghostClass="on-drag"
@@ -168,27 +168,27 @@
           class="draggable"
           draggable=".item"
         >
-          <div class="itemName">Guns</div>
+          <div class="itemName">Пушки</div>
           <tank-item
             v-for="accessory in allAccessories.Guns"
             :key="accessory.id"
             :item="accessory"
             class="item">
           </tank-item>
-          <div class="itemName">Engines</div>
+          <div class="itemName">Двигатели</div>
           <tank-item
             v-for="accessory in allAccessories.Engines"
             :key="accessory.id"
             :item="accessory"
             class="item">
           </tank-item>
-          <div class="itemName">Suspensions</div>
+          <div class="itemName">Подвески</div>
           <tank-item v-for="accessory in allAccessories.Suspensions" :key="accessory.id" :item="accessory"
                      class="item"></tank-item>
         </draggable>
       </tank-list>
 
-      <tank-list title="Suitable accessories" id="suitableAccessories">
+      <tank-list title="Совместимые аксессуары" id="suitableAccessories">
         <draggable
           group="tanks"
           ghostClass="on-drag"
@@ -242,7 +242,6 @@ export default defineComponent({
         this.shuffle(this.allAccessories.Guns);
         this.shuffle(this.allAccessories.Engines);
         this.shuffle(this.allAccessories.Suspensions);
-        // console.log(this.allAccessories);
       });
   },
   methods: {
@@ -258,7 +257,6 @@ export default defineComponent({
       let includeIS_3 = 0;
       let includeSU_101 = 0;
       this.items = document.querySelectorAll("#suitableAccessories .item");
-      // console.log(this.$store.state.accessoriesKV_4.length)
 
       this.items.forEach((item) => {
         if (this.$store.state.accessoriesKV_4.includes(item.textContent.trim())) {
@@ -276,28 +274,23 @@ export default defineComponent({
         this.modalShowKV_4 = true;
         this.modalShowIS_3 = false;
         this.modalShowSU_101 = false;
-        // console.log("KV-4", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
         alert("Correct");
       } else if (includeIS_3 > 0 && this.tankSelect === "ИС-3" && includeKV_4 === 0 && includeSU_101 === 0) {
         this.modalShowIS_3 = true;
         this.modalShowKV_4 = false;
         this.modalShowSU_101 = false;
-        // console.log("IS-3", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
         alert("Correct");
       } else if (includeSU_101 > 0 && this.tankSelect === "СУ-101" && includeKV_4 === 0 && includeIS_3 === 0) {
         this.modalShowSU_101 = true;
         this.modalShowKV_4 = false;
         this.modalShowIS_3 = false;
-        // console.log("SU-101", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
         alert("Correct");
       } else if (this.tankSelect === "") {
-        // console.log("empty", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
         alert("Choose tank");
       } else {
         this.modalShowSU_101 = false;
         this.modalShowKV_4 = false;
         this.modalShowIS_3 = false;
-        // console.log("wrong", this.modalShowKV_4, this.modalShowIS_3, this.modalShowSU_101);
         alert("Wrong!");
       }
     },

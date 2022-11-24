@@ -17,7 +17,7 @@
         @dragenter.prevent
         @dragover.prevent
       >
-        <h2 id="top">{{ category.name }}</h2>
+        <h3 id="top">{{ category.name }}</h3>
         <div
           v-for="item in items.filter((x) => x.categoryId === category.id)"
           @dragstart="onDragStart($event, item)"
@@ -41,7 +41,7 @@
 
     <modal-window v-show="isModalVisible && isCorrectAccessory" @close="closeModal"></modal-window>
     <modal-window v-show="isModalVisible && !isCorrectAccessory" @close="closeModal">
-      <template v-slot:body>No, you're not right!</template>
+      <template v-slot:body>Нет, неправильно!</template>
     </modal-window>
   </div>
 </template>
@@ -123,8 +123,8 @@ export default {
     const items = ref([]);
 
     const categories = ref([
-      { name: "All accessories", id: 1 },
-      { name: "All suitable accessories", id: 2 }
+      { name: "Все аксессуары", id: 1 },
+      { name: "Все совместимые аксессуары", id: 2 }
     ]);
 
     function onDragStart(ev, item) {
@@ -189,12 +189,13 @@ export default {
       min-height: 3200px;
       flex-basis: 40%;
 
-      h2 {
+      h3 {
         display: flex;
         justify-content: center;
         align-items: center;
         margin-bottom: 30px;
         min-height: 80px;
+        height: 120px;
       }
 
       .item {

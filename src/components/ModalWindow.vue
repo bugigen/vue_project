@@ -19,7 +19,7 @@
 
         <section class="modal-body">
           <slot name="body">
-            Yes, you're right! These accessories belong to Shelby Cobra.
+            Да, правильно! Эти аксессуары принадлежат Shelby Cobra.
           </slot>
         </section>
 
@@ -97,7 +97,7 @@ export default {
 
 .modal-body {
   position: relative;
-  padding: 20px 10px;
+  padding: 20px;
 }
 
 .btn-close {
