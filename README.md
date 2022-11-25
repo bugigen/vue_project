@@ -12,3 +12,5 @@ npm run serve
 
 ### Link:
 https://bugigen.github.io/vue_project/
+
+https://tank-project.netlify.app/bitcoin
